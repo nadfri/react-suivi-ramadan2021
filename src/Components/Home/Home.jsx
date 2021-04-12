@@ -1,13 +1,17 @@
 import React from 'react';
-import ToggleBtn from '../ToggleBtn/ToggleBtn';
 import './Home.scss';
+import { Link } from 'react-router-dom';
 
 
 function Home(props) {
+
+
 	return (
 		<div className='Home'>
-            <ToggleBtn checked={true}/>
-			<h1>HOME</h1>
+            <div className="buttons">
+			<Link to ="/inscription">S'inscrire</Link> 
+			<Link to ="/connexion">Se Connecter</Link> 
+            </div>
 		</div>
 	);
 }

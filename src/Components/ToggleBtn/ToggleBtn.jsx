@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Toggle from 'react-switch';
 import './ToggleBtn.scss';
 import fire from '../../firebase';
 import { withRouter } from 'react-router-dom';
 
 function ToggleBtn(props) {
+	const [checked, setChecked] = useState(false);
+
+	const currentUser = fire.auth().currentUser;
+	useEffect(() => {
+		if (currentUser) setChecked(true);
+	}, [currentUser]);
 
 	const logOut = () => {
+		setChecked(false);
 		fire.auth().signOut();
 		props.history.push('/');
 	};
@@ -16,7 +23,6 @@ function ToggleBtn(props) {
 			<Toggle
 				className='toggle'
 				onChange={logOut}
-				checked={props.checked}
 				uncheckedIcon={false}
 				checkedIcon={false}
 				onHandleColor='#2693e6'
@@ -27,7 +33,8 @@ function ToggleBtn(props) {
 				handleDiameter={30}
 				height={20}
 				width={48}
-				disabled={props.disabled ? true : false}
+				checked={checked}
+				disabled={!checked}
 			/>
 		</div>
 	);
