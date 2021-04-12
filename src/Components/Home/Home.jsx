@@ -1,11 +1,12 @@
 import React from 'react';
+import ToggleBtn from '../ToggleBtn/ToggleBtn';
 import './Home.scss';
-import Navbar from '../NavBar/NavBar';
+
 
 function Home(props) {
 	return (
 		<div className='Home'>
-			<Navbar />
+            <ToggleBtn checked={true}/>
 			<h1>HOME</h1>
 		</div>
 	);

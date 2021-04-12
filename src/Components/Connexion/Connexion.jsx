@@ -1,23 +1,44 @@
 import React, { useState } from 'react';
 import './Connexion.scss';
 import fire from '../../firebase';
+import ToggleBtn from '../ToggleBtn/ToggleBtn';
 
 function Connexion(props) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [password2, setPassword2] = useState('');
+	const [emailError, setEmailError] = useState(false);
+	const [loginError, setLoginError] = useState(false);
 
 	function submitHandler(e) {
 		e.preventDefault();
 	}
 
+	/******************LOGIN******************/
 	const login = () => {
 		const user = {
 			email,
 			password,
 		};
-	};
 
+		fire
+			.auth()
+			.signInWithEmailAndPassword(user.email, user.password)
+			.then((res) => props.history.push('/home'))
+			.catch((error) => {
+				console.log(error);
+				switch (error.code) {
+					case 'auth/invalide-email':
+					case 'auth/user-disabled':
+					case 'auth/user-not-found':
+					case 'auth/wrong-password':
+						setLoginError(true);
+						break;
+					default:
+				}
+			});
+	};
+	/***************Inscription***************/
 	const register = () => {
 		const user = {
 			email,
@@ -27,19 +48,28 @@ function Connexion(props) {
 		fire
 			.auth()
 			.createUserWithEmailAndPassword(user.email, user.password)
-			.then(props.history.push("/home"))
+			.then((res) => props.history.push('/home'))
 			.catch((error) => {
-				//Adresse mail deja existante
-				console.log('error :>> ', error);
+				console.log(error);
+				switch (error.code) {
+					case 'auth/email-already-in-use':
+						setEmailError(true);
+						break;
+					default:
+				}
 			});
 	};
 
 	return (
 		<div className='Connexion'>
-			<h1>Connexion</h1>
+			<ToggleBtn disabled={true} checked={false} />
+
 			<form onSubmit={submitHandler} className='form'>
+				{emailError && <div className='alert'>Adresse email déjà utilisée</div>}
+				{loginError && <div className='alert'>Impossible de vous authentifier</div>}
 				<label>
-					Email: <br />
+					Email:
+					<br />
 					<input
 						type='email'
 						placeholder='Email'
@@ -65,7 +95,7 @@ function Connexion(props) {
 						type='password'
 						placeholder='Confirmation'
 						minLength='6'
-						required
+						// required
 						autoComplete='new-password'
 						onChange={(e) => setPassword2(e.target.value)}
 					/>
@@ -77,7 +107,7 @@ function Connexion(props) {
 					</button>
 					<button
 						type='submit'
-						disabled={!(password === password2 && password !== '')}
+						// disabled={!(password === password2 && password !== '')}
 						onClick={register}>
 						Inscription
 					</button>

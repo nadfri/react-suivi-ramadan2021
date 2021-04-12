@@ -4,6 +4,7 @@ import Connexion from '../Components/Connexion/Connexion';
 import { Route, Switch } from 'react-router-dom';
 import Home from '../Components/Home/Home';
 import fire from '../firebase';
+import wallpaper from './wall2.jpg';
 
 function App() {
 	//useState
@@ -22,7 +23,8 @@ function App() {
 	};
 
 	return (
-		<div className='App'>
+		<div className='App' style={{ backgroundImage: `url(${wallpaper})` }}>
+			
 			<Switch>
 				<Route exact path='/' component={Connexion} />
 				<Route exact path='/home' component={Home} />

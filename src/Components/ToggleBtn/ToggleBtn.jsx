@@ -1,0 +1,36 @@
+import React, { useState } from 'react';
+import Toggle from 'react-switch';
+import './ToggleBtn.scss';
+import fire from '../../firebase';
+import { withRouter } from 'react-router-dom';
+
+function ToggleBtn(props) {
+
+	const logOut = () => {
+		fire.auth().signOut();
+		props.history.push('/');
+	};
+
+	return (
+		<div className='ToggleBtn'>
+			<Toggle
+				className='toggle'
+				onChange={logOut}
+				checked={props.checked}
+				uncheckedIcon={false}
+				checkedIcon={false}
+				onHandleColor='#2693e6'
+				onColor='#86ffc6'
+				offColor='#f79e8e'
+				boxShadow='0px 1px 5px rgba(0, 0, 0, 0.6)'
+				activeBoxShadow='0px 0px 1px 10px rgba(0, 0, 0, 0.2)'
+				handleDiameter={30}
+				height={20}
+				width={48}
+				disabled={props.disabled ? true : false}
+			/>
+		</div>
+	);
+}
+
+export default withRouter(ToggleBtn);
