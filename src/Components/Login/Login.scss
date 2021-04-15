@@ -34,7 +34,6 @@
 
 	label {
 		margin-bottom: 10px;
-		font-weight: bold;
 		color: #2b9cff;
 	}
 
@@ -52,9 +51,10 @@
 		padding: 5px;
 		border-radius: 5px;
         background-color: #5ab4ea;
-        font-weight: 600;
         color: white;
+		font-size: 1.2rem;
         box-shadow: 0 0 5px 0 #3e3e3e;
+		font-family: Lobster;
 
         &:disabled{
             background-color: rgba(90, 180, 234,.4);

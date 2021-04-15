@@ -1,0 +1,28 @@
+.Total{
+    border: 1px outset #5b88af;
+    border-radius: 5px;
+    background-color:rgba(211, 224, 234, 0.3);
+    grid-area: 8 / 3 / 9 / 5; 
+    box-shadow: 2px 1px 4px 0px #3e3e3e;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    .line{
+        display: flex;
+        justify-content:space-between;
+        padding-left: 2px;
+        padding-right: 4px;
+        text-shadow: 1px 1px 2px black;
+        color: #2b9cff;
+
+        .green{
+            color:green;
+        }
+
+        .red{
+            color:red;
+        }
+    }
+
+}

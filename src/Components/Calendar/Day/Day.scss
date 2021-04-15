@@ -1,0 +1,68 @@
+.Day {
+	border: 1px outset #5b88af;
+	border-radius: 5px;
+	//background-color: rgba(43, 156, 255, 0.2);
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 2px 1px 4px 0px #3e3e3e;
+	transition: all 0.5s;
+
+	.date,
+	.poids-valid {
+		font-size: 0.8rem;
+		width: 100%;
+		text-shadow: 1px 1px 2px black;
+	}
+
+	.date {
+        text-align: right;
+		font-style: italic;
+		color: white;
+		padding-right: 4px;
+	}
+    
+    .poids-valid {
+        text-align: left;
+        position: relative;
+    }
+    .poids{
+        color: #d26f6f;
+    }
+
+    .valid{
+        position: absolute;
+        right:0px;
+        bottom: -5px;
+        font-size: 2rem;
+        color: gray;
+        opacity: 0.5;
+        
+    }
+
+    .success{
+        color: #65d8c3;
+        opacity: 1;
+    }
+
+	.echec{
+		color: orangered;
+        opacity: 1;
+	}
+
+
+	.jour {
+		font-size: 1.4rem;
+		background-color: rgba(43, 156, 255, 0.7);
+		border-radius: 5px;
+		width: 34px;
+		color: gold;
+		text-shadow: 1px 1px 2px black;
+	}
+
+	&:active {
+		background-color: rgba(43, 156, 255, 0.2);
+	}
+}

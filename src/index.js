@@ -5,13 +5,9 @@ import App from './Container/App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
-
-
 ReactDOM.render(
 	<React.StrictMode>
-		
-			<App />
-		
+		<App />
 	</React.StrictMode>,
 	document.getElementById('root'),
 );
