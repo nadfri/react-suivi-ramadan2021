@@ -14,7 +14,7 @@
 	h1 {
 		margin: 0;
 		margin-top: 10px;
-		background-color: rgba(211, 224, 234, 0.9);
+		background-color: rgba(211, 224, 234, 0.7);
 		padding: 5px 20px;
 		border-radius: 5px;
 		color: #2b9cff;
@@ -25,8 +25,8 @@
 
 	form {
 		margin-top: 20%;
-		background-color: rgba(211, 224, 234, 0.9);
-		padding: 30px 10px;
+		background-color: rgba(211, 224, 234, 0.7);
+		padding: 20px 10px 10px 10px;
 		border-radius: 5px;
 		text-align: left;
 		width: 95%;
@@ -48,6 +48,7 @@
 		padding: 5px;
 		border-radius: 5px;
 		width: 100%;
+		background-color: white;
 	}
 
 	.buttons {
@@ -57,7 +58,6 @@
 		button {
 			margin: 10px 0px;
 			border: none;
-			width: 100%;
 			padding: 5px;
 			border-radius: 5px;
 			background-color: #5ab4ea;
@@ -65,8 +65,18 @@
 			font-size: 1.2rem;
 			box-shadow: 0 0 5px 0 #3e3e3e;
 			font-family: Lobster;
-
 			width: 48%;
 		}
+	}
+
+	.suppression {
+		color: white;
+		background-color: red;
+		border-radius: 5px;
+		margin-top: 15px;
+		border: none;
+		box-shadow: 0 0 5px 0 #3e3e3e;
+		font-family: Lobster;
+		padding: 5px;
 	}
 }

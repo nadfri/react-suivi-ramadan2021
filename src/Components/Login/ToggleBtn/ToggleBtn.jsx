@@ -15,7 +15,7 @@ function ToggleBtn(props) {
 	const logOut = () => {
 		setChecked(false);
 		fire.auth().signOut();
-		props.history.push('/');
+		localStorage.removeItem('user');
 	};
 
 	return (

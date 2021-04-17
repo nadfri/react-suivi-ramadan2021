@@ -63,6 +63,7 @@ function Inscription(props) {
 			.createUserWithEmailAndPassword(email, password)
 			.then((newUser) => {
 				db.collection("users").doc(newUser.user.uid).set({...data,id: newUser.user.uid})
+				localStorage.setItem('user', JSON.stringify(newUser.user));
 				props.history.push('/calendar');
 			})
 			.catch((error) => setError(error.message));

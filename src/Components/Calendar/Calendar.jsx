@@ -1,43 +1,46 @@
-import fire, { db } from '../../firebase';
+import { db } from '../../firebase';
 import React, { useState, useEffect } from 'react';
-import InfoBar from './InfoBar/InfoBar';
 import './Calendar.scss';
+import settingIco from './Settings/settings.png';
+import InfoBar from './InfoBar/InfoBar';
 import Day from './Day/Day';
 import Total from './Total/Total';
-import Settings from '../Settings/Settings';
-import params from './params.png';
+import Settings from './Settings/Settings';
 import Loader from '../Loader/Loader';
 
 function Calendar(props) {
-	const user = props.user;
-	//if (!user) props.history.push('/');
-
-	const [firstDay, setfirstDay] = useState('2021-04-13'); //YYYY-MM-DD
-	const [firstPoids, setFirstPoids] = useState(null);
-	const [displaySetting, setDisplaySetting] = useState(false);
-	const [loader, setLoader] = useState(true);
+	const user = props.user 
+	//|| JSON.parse(localStorage.getItem('user'));
+	const [displaySettings, setDisplaySettings] = useState(false);
+	const [loader, setLoader] = useState(false);
 	const [state, setState] = useState(null);
 
 	/*Gestion du Settings*/
-	const changeFirstPoids = (value) => setFirstPoids(value);
-	const changeFirstDay = (value) => setfirstDay(value);
-	const changeDisplaySetting = (value) => setDisplaySetting(value);
+	const changeFirstPoids = (value) => setState((prev) => ({ ...prev, firstPoids: value }));
+	const changeFirstDay = (value) => setState((prev) => ({ ...prev, firstDay: value }));
+	const changeFirstConnect = (value) => setState((prev) => ({ ...prev, firstConnect: value }));
+	const changeDisplaySettings = (value) => setDisplaySettings(value);
+
+	/*Suppression DB*/
+	const suppressionDB = () => {
+		console.log('Suppression');
+		setDisplaySettings(false);
+	};
 
 	/*Chargement des données*/
 	useEffect(() => {
-		if (user) {
-			db.collection('users')
-				.doc(user.uid)
-				.get()
-				.then((doc) => {
-					changeDisplaySetting(false);
-					setState(doc.data());
-					setLoader(false);
-				})
-				.catch((err) => console.log(err));
-		}
+		setLoader(true);
+		db.collection('users')
+			.doc(user.uid)
+			.get()
+			.then((doc) => {
+				setState(doc.data());
+				setLoader(false);
+				if (doc.data().firstConnect) setDisplaySettings(true);
+			})
+			.catch((err) => console.log(err));
 
-		return () => console.log('CleanUp');
+		return () => {console.log('CleanUp');};
 	}, []);
 
 	/*Mise en place du calendrier*/
@@ -48,27 +51,58 @@ function Calendar(props) {
 			date.setDate(firstDay.getDate() + index);
 			date = new Intl.DateTimeFormat('fr-FR').format(date);
 
-			return <Day key={index} date={date} state={day} />;
+			return <Day 
+			key={index} 
+			date={date} 
+			state={day} 
+			firstPoids={state.firstPoids}
+			index={index}
+			changeDayPoids={changeDayPoids}
+			checkValidDay={checkValidDay}
+			/>;
 		});
 	}
+
+
+	/*Fonction Mise à jour via Day/Modale */
+	const changeDayPoids = (index, value) => {
+		const copyState = {...state};
+		copyState.jours[index].poids = value;
+		setState(copyState);
+		db.collection('users').doc(props.user.uid).update(copyState);
+	}
+
+	const checkValidDay = (index, valid) =>{
+		const copyState = {...state};
+		copyState.jours[index].valid = valid;
+		copyState.jours[index].checked = true;
+		setState(copyState);
+		db.collection('users').doc(props.user.uid).update(copyState);
+	}
+
+
 
 	/*Rendu JSX*/
 	return (
 		<div className='Calendar'>
 			{loader && <Loader />}
 			<img
-				src={params}
-				className='params'
+				src={settingIco}
+				className='settingIco'
 				alt='parameters'
-				onClick={() => changeDisplaySetting(true)}
+				onClick={() => changeDisplaySettings(true)}
 			/>
-			{displaySetting ? (
+
+			{displaySettings ? (
 				<Settings
-					firstDay={firstDay}
-					firstPoids={firstPoids}
+					firstDay={state.firstDay}
+					firstPoids={state.firstPoids}
 					changeFirstDay={changeFirstDay}
 					changeFirstPoids={changeFirstPoids}
-					changeDisplaySetting={changeDisplaySetting}
+					changeDisplaySettings={changeDisplaySettings}
+					changeFirstConnect={changeFirstConnect}
+					suppressionDB={suppressionDB}
+					user={user}
 				/>
 			) : null}
 			<InfoBar />

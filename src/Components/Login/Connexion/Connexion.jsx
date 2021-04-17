@@ -8,7 +8,6 @@ function Connexion(props) {
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
 
-
 	/******************LOGIN******************/
 	function submitHandler(e) {
 		e.preventDefault();
@@ -16,7 +15,10 @@ function Connexion(props) {
 		fire
 			.auth()
 			.signInWithEmailAndPassword(email, password)
-			.then(() => props.history.push('/calendar'))
+			.then((res) => {
+				localStorage.setItem('user', JSON.stringify(res.user));
+				props.history.push('/calendar');
+			})
 			.catch((error) => setError(error.message));
 	}
 

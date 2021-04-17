@@ -1,15 +1,14 @@
 .InfoBar {
-    height: 32px;
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    color: #2b9cff;
-    
+	height: 32px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #2b9cff;
 
-    .date{
-        text-transform: capitalize;
-        background-color: rgba(211, 224, 234, 0.8);
-        padding: 0 5px;
-        border-radius: 5px;
-    }
+	.date {
+		text-transform: capitalize;
+		background-color: rgba(211, 224, 234, 0.8);
+		padding: 0 5px;
+		border-radius: 5px;
+	}
 }
