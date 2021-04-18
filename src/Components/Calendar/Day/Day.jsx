@@ -26,9 +26,25 @@ function Day(props) {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		setModalDisplay(false);
-		props.changeDayPoids(props.index, poidsUpdate);
-		if (selected === 'oui') props.checkValidDay(props.index, true);
-		else props.checkValidDay(props.index, false);
+		
+		if (selected === 'oui')   
+		{
+			props.checkValidDay(props.index, true, true);
+			props.changeDayPoids(props.index, poidsUpdate);
+		}
+			
+		else if(selected === "reset") 
+		{
+			props.checkValidDay(props.index, false, false);
+			//setPoidsUpdate("");
+			props.changeDayPoids(props.index, "");
+		}
+
+		else   
+		{
+			props.checkValidDay(props.index, false, true);
+			props.changeDayPoids(props.index, poidsUpdate);
+		}
 	};
 
 	//Gestion de la modale
@@ -60,6 +76,7 @@ function Day(props) {
 					<form onSubmit={submitHandler} className='form'>
 						<div className='titre'> Avez vous jeuner ce jour: ({props.date})</div>
 						<div className='buttons-radio'>
+
 							<div className='button-radio green'>
 								<input
 									type='radio'
@@ -70,6 +87,17 @@ function Day(props) {
 									onChange={(e) => setSelected(e.target.value)}
 								/>
 								<label htmlFor='oui'>Oui</label>
+							</div>
+							<div className='button-radio gray'>
+								<input
+									type='radio'
+									id='reset'
+									name='check'
+									value='reset'
+									checked={selected === 'reset'}
+									onChange={(e) => setSelected(e.target.value)}
+								/>
+								<label htmlFor='reset'>Reset</label>
 							</div>
 							<div className='button-radio red'>
 								<input

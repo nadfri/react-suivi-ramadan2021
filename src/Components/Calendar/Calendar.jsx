@@ -107,10 +107,10 @@ function Calendar(props) {
 		db.collection('users').doc(props.user.uid).update(copyState);
 	};
 
-	const checkValidDay = (index, valid) => {
+	const checkValidDay = (index, valid, check) => {
 		const copyState = { ...state };
 		copyState.jours[index].valid = valid;
-		copyState.jours[index].checked = true;
+		copyState.jours[index].checked = check;
 		setState(copyState);
 		db.collection('users').doc(props.user.uid).update(copyState);
 	};

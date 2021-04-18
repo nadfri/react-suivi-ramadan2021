@@ -168,9 +168,11 @@
 		.buttons-radio {
 			display: flex;
 			justify-content: space-between;
+			margin: 5px 0 10px 0;
+			
 
 			.button-radio {
-				margin: 5px 0px 10px;
+				
 				border: none;
 				padding: 5px;
 				border-radius: 5px;
@@ -178,12 +180,12 @@
 				font-size: 1.1rem;
 				box-shadow: 0 0 5px 0 #3e3e3e;
 				font-family: Lobster;
-				width: 48%;
+				width: 32%;
 				text-align: center;
 
 				label {
 					display: inline-block;
-					width: 80%;
+					width: 77%;
 				}
 
 				input:checked {
@@ -197,6 +199,10 @@
 
 			.red {
 				background-color: #ec6565;
+			}
+
+			.gray{
+				background-color:  #8c8c8c;
 			}
 		}
 	}
