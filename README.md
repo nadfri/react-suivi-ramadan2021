@@ -1,5 +1,7 @@
 # Application de suivi du Ramadan en `React`
 
+## Avec Base de Données `FireBase` pourla connexion et la gestion des données
+
 Pour pouvoir installer ce projet sur votre ordinateur, commencez par taper les commandes suivantes :
 
 ### `npm install`

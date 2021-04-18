@@ -9,10 +9,17 @@ function Day(props) {
 	const [selected, setSelected] = useState('oui');
 	const [poidsUpdate, setPoidsUpdate] = useState(props.firstPoids);
 
-	let classes;
-	if (valid) classes = 'success';
-	else if (!valid && checked) classes = 'echec';
-	else classes = '';
+	let classesBack, classesIcons;
+	if (valid) {
+		classesBack = 'backSuccess';
+		classesIcons = 'success';
+	} else if (!valid && checked) {
+		classesIcons = 'echec';
+		classesBack = 'backEchec';
+	} else {
+		classesIcons = '';
+		classesBack = '';
+	}
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -32,12 +39,12 @@ function Day(props) {
 	};
 
 	return (
-		<div className='Day' onClick={openModal}>
+		<div className={`Day ${classesBack}`} onClick={openModal}>
 			<div className='date'>{props.date}</div>
 			<div className='jour'>{jour}</div>
 			<div className='poids-valid'>
 				<span className='poids'>{poids}Kgs</span>
-				<span className={`valid ${classes}`}>{valid ? '✔' : '✘'}</span>
+				<span className={`valid ${classesIcons}`}>{valid ? '✔' : '✘'}</span>
 			</div>
 
 			{/***********************MODALE******************/}
