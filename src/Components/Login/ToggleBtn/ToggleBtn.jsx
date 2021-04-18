@@ -4,7 +4,7 @@ import './ToggleBtn.scss';
 import fire from '../../../firebase';
 import { withRouter } from 'react-router-dom';
 
-function ToggleBtn(props) {
+function ToggleBtn() {
 	const [checked, setChecked] = useState(false);
 
 	const currentUser = fire.auth().currentUser;

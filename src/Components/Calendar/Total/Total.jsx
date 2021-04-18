@@ -7,17 +7,17 @@ function Total(props) {
 			<div className='line'>
 				Jours Jeunés:
 				<span>
-					<span className='green'>1</span>/30
+					<span className='green'>{props.jeuner}</span>/30
 				</span>
 			</div>
 			<div className='line'>
 				Jours Manqués:
-				<span className='red'>2</span>
+				<span className='red'>{props.manquer}</span>
 			</div>
 			<div className='line'>
 				Evolution Poids:
 				<span>
-					<span className='green'>-2.1</span>Kgs
+					<span  className={props.pertePoids<=0? "green" : "red"}>{props.pertePoids}</span> Kgs
 				</span>
 			</div>
 		</div>

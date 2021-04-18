@@ -11,9 +11,14 @@ import Loader from '../Loader/Loader';
 function Calendar(props) {
 	const user = props.user 
 	//|| JSON.parse(localStorage.getItem('user'));
+	
+	/*State*/
 	const [displaySettings, setDisplaySettings] = useState(false);
 	const [loader, setLoader] = useState(false);
 	const [state, setState] = useState(null);
+	const [jeuner, setJeuner] = useState(0);
+	const [manquer, setManquer] = useState(0);
+	const [pertePoids, setPertePoids] = useState(0)
 
 	/*Gestion du Settings*/
 	const changeFirstPoids = (value) => setState((prev) => ({ ...prev, firstPoids: value }));
@@ -39,9 +44,12 @@ function Calendar(props) {
 				if (doc.data().firstConnect) setDisplaySettings(true);
 			})
 			.catch((err) => console.log(err));
-
 		return () => {console.log('CleanUp');};
 	}, []);
+
+	useEffect(()=> {
+		state && updateTotal();
+	},[state])
 
 	/*Mise en place du calendrier*/
 	function calendrier(state) {
@@ -80,6 +88,27 @@ function Calendar(props) {
 		db.collection('users').doc(props.user.uid).update(copyState);
 	}
 
+	/*Mise à jour des Totaux*/
+	const updateTotal = () => {
+		let countValid = 0;
+		let countNotValid = 0;
+		state.jours.forEach(jour=> {
+			if(jour.valid) countValid++;
+ 			if(!jour.Valid && jour.checked) countNotValid++
+		});
+
+		const tabKgs = state.jours.filter(jour=>jour.poids);
+		if(tabKgs.length < 1 ) setPertePoids(0);
+		else {
+			let total = (-(state.firstPoids - tabKgs[tabKgs.length-1].poids)).toFixed(1);
+			total = total>0? `+${total}` : total;
+			setPertePoids(total);
+		}
+
+		setJeuner(countValid);
+		setManquer(countNotValid);
+	}
+
 
 
 	/*Rendu JSX*/
@@ -108,7 +137,7 @@ function Calendar(props) {
 			<InfoBar />
 			{state && (
 				<div className='grid'>
-					{calendrier(state)} <Total />
+					{calendrier(state)} <Total jeuner={jeuner} manquer={manquer} pertePoids={pertePoids}/>
 				</div>
 			)}
 		</div>

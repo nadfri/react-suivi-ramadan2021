@@ -73,13 +73,16 @@ function Day(props) {
 
 						<div className='formPoids'>
 							<label className='titre'>Votre Poids aujourd'hui:</label>
-							<input
-								type='number'
-								step='0.1'
-								placeholder='Poids'
-								value={poidsUpdate}
-								onChange={(e) => setPoidsUpdate(e.target.value)}
-							/>
+							<div className='input'>
+								<input
+									type='number'
+									step='0.1'
+									placeholder='Poids'
+									value={poidsUpdate}
+									onChange={(e) => setPoidsUpdate(e.target.value)}
+								/>
+								<span className='kgs'>Kgs</span>
+							</div>
 						</div>
 
 						<div className='buttons'>
