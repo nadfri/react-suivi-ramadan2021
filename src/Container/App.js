@@ -12,7 +12,6 @@ import Inscription from '../Components/Login/Inscription/Inscription';
 //import Calendar from '../Components/Calendar/Calendar';
 import Forget from '../Components/Login/Forget/Forget';
 import ToggleBtn from '../Components/Login/ToggleBtn/ToggleBtn';
-import Loader from '../Components/Loader/Loader';
 import PwaButton from '../Components/PwaButton/PwaButton';
 
 function App(props) {
@@ -40,7 +39,7 @@ function App(props) {
 			<BrowserRouter>
 				<ToggleBtn />
 				<PwaButton />
-				<Suspense fallback={<Loader/>}>
+				<Suspense fallback={<h1 className="loading">Chargement...</h1>}>
 				<Switch>
 					<Route exact path='/'            render={() => (user? <Calendar user={user}/> : <Home />)}/>
 					<Route exact path='/calendar'    render={() => (user? <Calendar user={user}/> : <Home />)}/>
