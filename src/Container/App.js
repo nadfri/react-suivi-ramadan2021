@@ -13,6 +13,7 @@ import Inscription from '../Components/Login/Inscription/Inscription';
 import Forget from '../Components/Login/Forget/Forget';
 import ToggleBtn from '../Components/Login/ToggleBtn/ToggleBtn';
 import Loader from '../Components/Loader/Loader';
+import PwaButton from '../Components/PwaButton/PwaButton';
 
 function App(props) {
 	//useState
@@ -38,6 +39,7 @@ function App(props) {
 		<div className='App' style={{ backgroundImage: `url(${wallpaper})` }}>
 			<BrowserRouter>
 				<ToggleBtn />
+				<PwaButton />
 				<Suspense fallback={<Loader/>}>
 				<Switch>
 					<Route exact path='/'            render={() => (user? <Calendar user={user}/> : <Home />)}/>
