@@ -1,36 +1,33 @@
+//Librairies
 import { db } from '../../firebase';
 import React, { useState, useEffect } from 'react';
+//CSS
 import './Calendar.scss';
 import settingIco from './Settings/settings.png';
-import InfoBar from './InfoBar/InfoBar';
+//Components
 import Day from './Day/Day';
-import Total from './Total/Total';
-import Settings from './Settings/Settings';
+import InfoBar from './InfoBar/InfoBar';
 import Loader from '../Loader/Loader';
+import Settings from './Settings/Settings';
+import Total from './Total/Total';
 
 function Calendar(props) {
-	const user = props.user 
+	const user = props.user;
 	//|| JSON.parse(localStorage.getItem('user'));
-	
+
 	/*State*/
 	const [displaySettings, setDisplaySettings] = useState(false);
-	const [loader, setLoader] = useState(false);
-	const [state, setState] = useState(null);
-	const [jeuner, setJeuner] = useState(0);
-	const [manquer, setManquer] = useState(0);
-	const [pertePoids, setPertePoids] = useState(0)
+	const [loader, setLoader] 		            = useState(false);
+	const [state, setState] 		            = useState(null);
+	const [jeuner, setJeuner]                   = useState(0);
+	const [manquer, setManquer]                 = useState(0);
+	const [pertePoids, setPertePoids]           = useState(0);
 
 	/*Gestion du Settings*/
-	const changeFirstPoids = (value) => setState((prev) => ({ ...prev, firstPoids: value }));
-	const changeFirstDay = (value) => setState((prev) => ({ ...prev, firstDay: value }));
-	const changeFirstConnect = (value) => setState((prev) => ({ ...prev, firstConnect: value }));
+	const changeFirstPoids      = (value) => setState((prev) => ({ ...prev, firstPoids: value }));
+	const changeFirstDay        = (value) => setState((prev) => ({ ...prev, firstDay: value }));
+	const changeFirstConnect    = (value) => setState((prev) => ({ ...prev, firstConnect: value }));
 	const changeDisplaySettings = (value) => setDisplaySettings(value);
-
-	/*Suppression DB*/
-	const suppressionDB = () => {
-		console.log('Suppression');
-		setDisplaySettings(false);
-	};
 
 	/*Chargement des données*/
 	useEffect(() => {
@@ -44,12 +41,38 @@ function Calendar(props) {
 				if (doc.data().firstConnect) setDisplaySettings(true);
 			})
 			.catch((err) => console.log(err));
-		return () => {console.log('CleanUp');};
-	}, []);
+		return () => {
+			console.log('CleanUp');
+		};
+	}, [user]);
 
-	useEffect(()=> {
-		state && updateTotal();
-	},[state])
+	/*Mise à jour des Totaux*/
+	useEffect(() => {
+		if (state) {
+			let countValid = 0;
+			let countNotValid = 0;
+			state.jours.forEach((jour) => {
+				if (jour.valid) countValid++;
+				else if (!jour.Valid && jour.checked) countNotValid++;
+			});
+
+			setJeuner(countValid);
+			setManquer(countNotValid);
+
+			/*Mise à jour du Poids*/
+			if (state.firstPoids) 
+			{
+				const tabKgs = state.jours.filter((jour) => jour.poids);
+				if (tabKgs.length < 1) setPertePoids(0);
+				else 
+				{
+					let total = (-(state.firstPoids - tabKgs[tabKgs.length - 1].poids)).toFixed(1);
+					total = total > 0 ? `+${total}` : total;
+					setPertePoids(total);
+				}
+			}
+		}
+	}, [state]);
 
 	/*Mise en place du calendrier*/
 	function calendrier(state) {
@@ -59,59 +82,57 @@ function Calendar(props) {
 			date.setDate(firstDay.getDate() + index);
 			date = new Intl.DateTimeFormat('fr-FR').format(date);
 
-			return <Day 
-			key={index} 
-			date={date} 
-			state={day} 
-			firstPoids={state.firstPoids}
-			index={index}
-			changeDayPoids={changeDayPoids}
-			checkValidDay={checkValidDay}
-			/>;
+			return (
+				<Day
+					key={index}
+					date={date}
+					state={day}
+					firstPoids={state.firstPoids}
+					index={index}
+					changeDayPoids={changeDayPoids}
+					checkValidDay={checkValidDay}
+				/>
+			);
 		});
 	}
 
-
 	/*Fonction Mise à jour via Day/Modale */
 	const changeDayPoids = (index, value) => {
-		const copyState = {...state};
+		const copyState = { ...state };
 		copyState.jours[index].poids = value;
 		setState(copyState);
 		db.collection('users').doc(props.user.uid).update(copyState);
-	}
+	};
 
-	const checkValidDay = (index, valid) =>{
-		const copyState = {...state};
+	const checkValidDay = (index, valid) => {
+		const copyState = { ...state };
 		copyState.jours[index].valid = valid;
 		copyState.jours[index].checked = true;
 		setState(copyState);
 		db.collection('users').doc(props.user.uid).update(copyState);
-	}
+	};
 
-	/*Mise à jour des Totaux*/
-	const updateTotal = () => {
-		let countValid = 0;
-		let countNotValid = 0;
-		state.jours.forEach(jour=> {
-			if(jour.valid) countValid++;
- 			if(!jour.Valid && jour.checked) countNotValid++
-		});
 
-		const tabKgs = state.jours.filter(jour=>jour.poids);
-		if(tabKgs.length < 1 ) setPertePoids(0);
-		else {
-			let total = (-(state.firstPoids - tabKgs[tabKgs.length-1].poids)).toFixed(1);
-			total = total>0? `+${total}` : total;
-			setPertePoids(total);
+	/*Suppression DB*/
+	const suppressionDB = () => {
+		const copyState = {...state};
+		copyState.firstConnect = true;
+		copyState.firstPoids = null;
+
+		for (let jour of copyState.jours)
+		{ 
+			jour.poids   = null;
+			jour.valid   = false;
+			jour.checked = false;
 		}
 
-		setJeuner(countValid);
-		setManquer(countNotValid);
-	}
+		db.collection('users').doc(props.user.uid).set(copyState);
+		setState(copyState);
+		setDisplaySettings(true)
+		
+	};
 
-
-
-	/*Rendu JSX*/
+	/********************Rendu JSX********************/
 	return (
 		<div className='Calendar'>
 			{loader && <Loader />}
@@ -137,7 +158,8 @@ function Calendar(props) {
 			<InfoBar />
 			{state && (
 				<div className='grid'>
-					{calendrier(state)} <Total jeuner={jeuner} manquer={manquer} pertePoids={pertePoids}/>
+					{calendrier(state)}{' '}
+					<Total jeuner={jeuner} manquer={manquer} pertePoids={pertePoids} />
 				</div>
 			)}
 		</div>

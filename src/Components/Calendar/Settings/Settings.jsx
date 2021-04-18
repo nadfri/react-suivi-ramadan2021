@@ -5,6 +5,8 @@ import { db } from '../../../firebase';
 function Settings(props) {
 	const [firstDay, setFirstDay] = useState(props.firstDay);
 	const [firstPoids, setFirstPoids] = useState(props.firstPoids);
+	const [confirmation, setConfirmation] = useState(false);
+	const [confirmationSupp, setConfirmationSupp] = useState(false);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -16,11 +18,24 @@ function Settings(props) {
         db.collection('users').doc(props.user.uid).update({firstPoids,firstDay,firstConnect: false});
 	};
 
+	const suppressionOnclick = () =>{
+		setConfirmationSupp(true);
+	}
+
+	const suppressionDef = () =>{
+		props.suppressionDB();
+		setConfirmation(true);
+		setFirstPoids("");
+		props.changeFirstPoids("");
+		setConfirmationSupp(false);
+	}
+
 
 	return (
 		<div className='Settings'>
 			<h1>Paramètres</h1>
 			<form onSubmit={submitHandler} className='form'>
+			{confirmation && <div className='alert'>Données Effacées - Mettez les Infos à Jour</div>}
 				<label>
 					Modifier le 1er jour du Ramadan:
 					<br />
@@ -42,7 +57,8 @@ function Settings(props) {
 						Annuler
 					</button>
 				</div>
-                    <button className="suppression" onClick={props.suppressionDB}>Supprimer toutes les données</button>
+                    <button type="button" className="suppression" onClick={suppressionOnclick}>Supprimer Toutes les Données</button>
+                    {confirmationSupp? <button type="button" className="suppression def" onClick={suppressionDef}>Confirmer la Suppression</button> : null}
 			</form>
 		</div>
 	);

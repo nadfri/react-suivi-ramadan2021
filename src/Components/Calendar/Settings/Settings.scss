@@ -24,9 +24,10 @@
 	}
 
 	form {
+		position: relative;
 		margin-top: 20%;
 		background-color: rgba(211, 224, 234, 0.7);
-		padding: 20px 10px 10px 10px;
+		padding: 40px 10px 10px 10px;
 		border-radius: 5px;
 		text-align: left;
 		width: 95%;
@@ -71,12 +72,34 @@
 
 	.suppression {
 		color: white;
-		background-color: red;
+		background-color: #ff4545;
 		border-radius: 5px;
 		margin-top: 15px;
 		border: none;
 		box-shadow: 0 0 5px 0 #3e3e3e;
 		font-family: Lobster;
 		padding: 5px;
+	}
+
+	.def{
+		background-color: red;
+		color: black;
+	}
+
+	.alert {
+		position: absolute;
+		font-style: italic;
+		font-weight: 400;
+		top: 5px;
+		left: 50%;
+		transform: translateX(-50%);
+		border-radius: 5px;
+		padding: 2px 10px;
+		width: 96%;
+		text-align: center;
+		box-shadow: 0 0 5px 0 #a7a7a7;
+		color: red;
+		background-color: rgba(255, 173, 173, 0.5);
+		text-shadow: 1px 1px 2px #3e3e3e;
 	}
 }
