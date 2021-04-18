@@ -2,6 +2,9 @@ import React from 'react';
 import "./InfoBar.scss"
 
 function InfoBar() {
+
+    
+
     return (
         <div className="InfoBar">
             <span className="date">

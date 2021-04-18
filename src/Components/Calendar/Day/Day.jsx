@@ -37,11 +37,12 @@ function Day(props) {
 		setModalDisplay(true);
 	};
 	const cancelClick = (e) => {
-		setModalDisplay(false);
 		e.stopPropagation();
+		if(e.target.id === "modaleAnnuler" || e.target.id === "modale")
+		setModalDisplay(false);
 	};
 
-	
+
 	/********************Rendu JSX********************/
 	return (
 		<div className={`Day ${classesBack}`} onClick={openModal}>
@@ -54,7 +55,7 @@ function Day(props) {
 
 			{/***********************MODALE******************/}
 			{modalDisplay && (
-				<div className='Modale'>
+				<div className='Modale' onClick={cancelClick} id="modale">
 					<h1>Le {jour} Ramadan</h1>
 					<form onSubmit={submitHandler} className='form'>
 						<div className='titre'> Avez vous jeuner ce jour: ({props.date})</div>
@@ -99,7 +100,7 @@ function Day(props) {
 
 						<div className='buttons'>
 							<button type='submit'>Confirmer</button>
-							<button type='button' onClick={cancelClick}>
+							<button type='button' onClick={cancelClick} id="modaleAnnuler">
 								Annuler
 							</button>
 						</div>

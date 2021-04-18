@@ -33,9 +33,17 @@ function Settings(props) {
 		setConfirmationSupp(false);
 	}
 
+	//Gestion de l'event Annuler
+	const cancel = e => {
+		console.log(e.target);
+		e.stopPropagation();
+		if(e.target.id === "settings" || e.target.id === "annuler")
+		props.changeDisplaySettings(false);
+	}
+
 /********************Rendu JSX********************/
 	return (
-		<div className='Settings'>
+		<div className='Settings' onClick={cancel} id="settings">
 			<h1>Paramètres</h1>
 			<form onSubmit={submitHandler} className='form'>
 			{confirmation && <div className='alert'>Données Effacées - Mettez les Infos à Jour</div>}
@@ -56,7 +64,7 @@ function Settings(props) {
 				</label>
 				<div className='buttons'>
 					<button type='submit'>Confirmer</button>
-					<button type='button' onClick={() => props.changeDisplaySettings(false)}>
+					<button type='button' onClick={cancel} id="annuler">
 						Annuler
 					</button>
 				</div>
