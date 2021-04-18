@@ -14,7 +14,6 @@ import Total from './Total/Total';
 
 function Calendar(props) {
 	const user = props.user;
-	//|| JSON.parse(localStorage.getItem('user'));
 
 	/*State*/
 	const [displaySettings, setDisplaySettings] = useState(false);
@@ -42,9 +41,9 @@ function Calendar(props) {
 				if (doc.data().firstConnect) setDisplaySettings(true);
 			})
 			.catch((err) => console.log(err));
-		return () => {
-			console.log('CleanUp');
-		};
+
+		//WillUnmount	
+		return () => console.log('CleanUp');
 	}, [user]);
 
 	/*Mise à jour des Totaux*/
@@ -60,7 +59,7 @@ function Calendar(props) {
 			setJeuner(countValid);
 			setManquer(countNotValid);
 
-			/*Mise à jour du Poids*/
+	/*Mise à jour du Poids*/
 			if (state.firstPoids) 
 			{
 				const tabKgs = state.jours.filter((jour) => jour.poids);
@@ -81,7 +80,10 @@ function Calendar(props) {
 			let firstDay = new Date(state.firstDay);
 			let date = new Date();
 			date.setDate(firstDay.getDate() + index);
-			date = new Intl.DateTimeFormat('fr-FR').format(date);
+			date = new Intl.DateTimeFormat('fr-FR',{
+			year: "2-digit",
+			month: "2-digit",
+			day: "2-digit"}).format(date);
 
 			return (
 				<Day
@@ -114,7 +116,7 @@ function Calendar(props) {
 	};
 
 
-	/*Suppression DB*/
+	/*Suppression De la Base de Données*/
 	const suppressionDB = () => {
 		const copyState = {...state};
 		copyState.firstConnect = true;

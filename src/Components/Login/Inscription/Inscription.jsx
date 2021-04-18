@@ -69,6 +69,8 @@ function Inscription(props) {
 			.catch((error) => setError(error.message));
 	}
 
+
+/********************Rendu JSX********************/
 	return (
 		<div className='logBox'>
 			<h1>Inscription</h1>

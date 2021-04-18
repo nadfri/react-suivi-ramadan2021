@@ -10,7 +10,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-    
 
 	h1 {
 		margin: 0;
@@ -101,11 +100,10 @@
 				width: 80%;
 			}
 
-            input:checked {
-                border: 10px solid blue;
-            }
+			input:checked {
+				border: 10px solid blue;
+			}
 		}
-
 
 		.green {
 			background-color: #1ccc1c;

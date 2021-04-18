@@ -33,7 +33,7 @@
 		position: absolute;
 		right: 0px;
 		bottom: -2px;
-		font-size: 2rem;
+		font-size: 1.5rem;
 		color: gray;
 		opacity: 0.5;
 	}
@@ -52,15 +52,15 @@
 	}
 
 	.echec {
-		color: orangered;
+		color: #ff500d;
 		opacity: 1;
 	}
 
 	.jour {
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 		background-color: rgba(43, 156, 255, 0.7);
 		border-radius: 5px;
-		width: 34px;
+		width: 30px;
 		color: gold;
 		text-shadow: 1px 1px 2px black;
 		margin: auto;

@@ -17,7 +17,10 @@ function Total(props) {
 			<div className='line'>
 				Evolution Poids:
 				<span>
-					<span  className={props.pertePoids<=0? "green" : "red"}>{props.pertePoids}</span> Kgs
+					<span className={props.pertePoids <= 0 ? 'green' : 'red'}>
+						{props.pertePoids}
+					</span>{' '}
+					Kgs
 				</span>
 			</div>
 		</div>

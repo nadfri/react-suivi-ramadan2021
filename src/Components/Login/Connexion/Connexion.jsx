@@ -4,6 +4,7 @@ import fire from '../../../firebase';
 import { Link } from 'react-router-dom';
 
 function Connexion(props) {
+	//State
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
@@ -22,6 +23,8 @@ function Connexion(props) {
 			.catch((error) => setError(error.message));
 	}
 
+
+/********************Rendu JSX********************/
 	return (
 		<div className='logBox'>
 			<h1>Connexion</h1>

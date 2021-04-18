@@ -4,6 +4,7 @@ import fire from '../../../firebase';
 import { Link } from 'react-router-dom';
 
 function Forget(props) {
+	//State
 	const [email, setEmail] = useState('');
 	const [error, setError] = useState('');
 	const [success, setSuccess] = useState('');

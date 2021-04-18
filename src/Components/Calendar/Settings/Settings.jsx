@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import './Settings.scss';
 import { db } from '../../../firebase';
+import './Settings.scss';
 
 function Settings(props) {
-	const [firstDay, setFirstDay] = useState(props.firstDay);
-	const [firstPoids, setFirstPoids] = useState(props.firstPoids);
-	const [confirmation, setConfirmation] = useState(false);
+	//State
+	const [firstDay, setFirstDay]                 = useState(props.firstDay);
+	const [firstPoids, setFirstPoids]             = useState(props.firstPoids);
+	const [confirmation, setConfirmation]         = useState(false);
 	const [confirmationSupp, setConfirmationSupp] = useState(false);
 
+	//Formulaire
 	const submitHandler = (e) => {
 		e.preventDefault();
 		props.changeFirstDay(firstDay);
@@ -18,6 +20,7 @@ function Settings(props) {
         db.collection('users').doc(props.user.uid).update({firstPoids,firstDay,firstConnect: false});
 	};
 
+	//Gestion de la suppression des données
 	const suppressionOnclick = () =>{
 		setConfirmationSupp(true);
 	}
@@ -30,7 +33,7 @@ function Settings(props) {
 		setConfirmationSupp(false);
 	}
 
-
+/********************Rendu JSX********************/
 	return (
 		<div className='Settings'>
 			<h1>Paramètres</h1>

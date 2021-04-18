@@ -9,6 +9,7 @@ function Day(props) {
 	const [selected, setSelected] = useState('oui');
 	const [poidsUpdate, setPoidsUpdate] = useState(props.firstPoids);
 
+	//Gestion des classes CSS
 	let classesBack, classesIcons;
 	if (valid) {
 		classesBack = 'backSuccess';
@@ -21,6 +22,7 @@ function Day(props) {
 		classesBack = '';
 	}
 
+	//Soumission Formulaire
 	const submitHandler = (e) => {
 		e.preventDefault();
 		setModalDisplay(false);
@@ -29,6 +31,7 @@ function Day(props) {
 		else props.checkValidDay(props.index, false);
 	};
 
+	//Gestion de la modale
 	const openModal = (e) => {
 		e.stopPropagation();
 		setModalDisplay(true);
@@ -38,6 +41,8 @@ function Day(props) {
 		e.stopPropagation();
 	};
 
+	
+	/********************Rendu JSX********************/
 	return (
 		<div className={`Day ${classesBack}`} onClick={openModal}>
 			<div className='date'>{props.date}</div>

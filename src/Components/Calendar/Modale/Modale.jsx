@@ -5,12 +5,9 @@ function Modale(props) {
 
     /*State*/
     const [selected, setSelected] = useState("oui");
-    const [poids, setPoids] = useState(props.firstPoids);
+    const [poids, setPoids]       = useState(props.firstPoids);
 
-
-	const submitHandler = (e) => {
-		e.preventDefault();
-	};
+	const submitHandler = e => e.preventDefault();
 
 	return (
 		<div className='Modale'>

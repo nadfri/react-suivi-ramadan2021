@@ -6,30 +6,28 @@ import fire from '../firebase';
 import './App.scss';
 import wallpaper from './wall1.jpg';
 //Composants
-//import Home from '../Components/Home/Home';
 import Connexion from '../Components/Login/Connexion/Connexion';
 import Inscription from '../Components/Login/Inscription/Inscription';
-//import Calendar from '../Components/Calendar/Calendar';
 import Forget from '../Components/Login/Forget/Forget';
 import ToggleBtn from '../Components/Login/ToggleBtn/ToggleBtn';
 import PwaButton from '../Components/PwaButton/PwaButton';
+//import Calendar from '../Components/Calendar/Calendar';
+//import Home from '../Components/Home/Home';
 
 function App(props) {
 	//useState
 	const [user, setUser] = useState(null);
-
+	
+	//Lazy Mode
 	const Home     = lazy(()=> import('../Components/Home/Home'));
 	const Calendar = lazy(()=> import('../Components/Calendar/Calendar'));
 
 	//DidMount
-	useEffect(() => {
-		authListener();
-	}, []);
+	useEffect(() => authListener(), []);
 
 	const authListener = () => {
 		fire.auth().onAuthStateChanged((user) => {
 			if (user) setUser(user);
-
 			else setUser(null);
 		});
 	};

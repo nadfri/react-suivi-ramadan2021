@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Toggle from 'react-switch';
-import './ToggleBtn.scss';
-import fire from '../../../firebase';
 import { withRouter } from 'react-router-dom';
+import Toggle from 'react-switch';
+import fire from '../../../firebase';
+import './ToggleBtn.scss';
 
 function ToggleBtn() {
 	const [checked, setChecked] = useState(false);

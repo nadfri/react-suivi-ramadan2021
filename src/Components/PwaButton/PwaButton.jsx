@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './PwaButton.scss';
 
 function PwaButton() {
+	//State
 	const [supportsPWA, setSupportsPWA] = useState(false);
 	const [promptInstall, setPromptInstall] = useState(null);
 
@@ -21,7 +22,6 @@ function PwaButton() {
 
 		return () => window.removeEventListener('beforeinstallprompt', handler);
 	}, []);
-
 
 	const click = () => promptInstall.prompt();
 
