@@ -1,21 +1,26 @@
 //Librairies
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 import fire from '../firebase';
 //CSS
 import './App.scss';
 import wallpaper from './wall1.jpg';
 //Composants
-import Home from '../Components/Home/Home';
+//import Home from '../Components/Home/Home';
 import Connexion from '../Components/Login/Connexion/Connexion';
 import Inscription from '../Components/Login/Inscription/Inscription';
-import Calendar from '../Components/Calendar/Calendar';
+//import Calendar from '../Components/Calendar/Calendar';
 import Forget from '../Components/Login/Forget/Forget';
 import ToggleBtn from '../Components/Login/ToggleBtn/ToggleBtn';
+import Loader from '../Components/Loader/Loader';
 
 function App(props) {
 	//useState
 	const [user, setUser] = useState(null);
+
+	const Home     = lazy(()=> import('../Components/Home/Home'));
+	const Calendar = lazy(()=> import('../Components/Calendar/Calendar'));
+
 	//DidMount
 	useEffect(() => {
 		authListener();
@@ -33,7 +38,7 @@ function App(props) {
 		<div className='App' style={{ backgroundImage: `url(${wallpaper})` }}>
 			<BrowserRouter>
 				<ToggleBtn />
-
+				<Suspense fallback={<Loader/>}>
 				<Switch>
 					<Route exact path='/'            render={() => (user? <Calendar user={user}/> : <Home />)}/>
 					<Route exact path='/calendar'    render={() => (user? <Calendar user={user}/> : <Home />)}/>
@@ -42,6 +47,7 @@ function App(props) {
 					<Route exact path='/forget'      component={Forget} />
 					<Route                           component={Home} />
 				</Switch>
+				</Suspense>
 
 			</BrowserRouter>
 		</div>

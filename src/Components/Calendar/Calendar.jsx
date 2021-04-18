@@ -10,6 +10,7 @@ import InfoBar from './InfoBar/InfoBar';
 import Loader from '../Loader/Loader';
 import Settings from './Settings/Settings';
 import Total from './Total/Total';
+import PwaButton from '../PwaButton/PwaButton';
 
 function Calendar(props) {
 	const user = props.user;
@@ -162,6 +163,8 @@ function Calendar(props) {
 					<Total jeuner={jeuner} manquer={manquer} pertePoids={pertePoids} />
 				</div>
 			)}
+
+			<PwaButton />
 		</div>
 	);
 }
