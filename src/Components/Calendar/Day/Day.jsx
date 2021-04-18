@@ -6,8 +6,8 @@ function Day(props) {
 
 	//State
 	const [modalDisplay, setModalDisplay] = useState(false);
-	const [selected, setSelected] = useState('oui');
-	const [poidsUpdate, setPoidsUpdate] = useState(props.firstPoids);
+	const [selected, setSelected]         = useState('oui');
+	const [poidsUpdate, setPoidsUpdate]   = useState(props.firstPoids);
 
 	//Gestion des classes CSS
 	let classesBack, classesIcons;
