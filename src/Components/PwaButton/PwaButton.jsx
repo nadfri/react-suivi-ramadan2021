@@ -14,7 +14,7 @@ function PwaButton() {
 				setPromptInstall(event);
 			}, 500);
 
-			setTimeout(() => setSupportsPWA(false), 10000);
+			setTimeout(() => setSupportsPWA(false), 7000);
 		};
 
 		window.addEventListener('beforeinstallprompt', handler);

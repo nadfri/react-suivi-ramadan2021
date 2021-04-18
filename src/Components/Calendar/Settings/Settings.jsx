@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Settings.scss';
 import { db } from '../../../firebase';
+import PwaButton from '../../PwaButton/PwaButton';
 
 function Settings(props) {
 	const [firstDay, setFirstDay] = useState(props.firstDay);
@@ -60,6 +61,7 @@ function Settings(props) {
                     <button type="button" className="suppression" onClick={suppressionOnclick}>Supprimer Toutes les Données</button>
                     {confirmationSupp? <button type="button" className="suppression def" onClick={suppressionDef}>Confirmer la Suppression</button> : null}
 			</form>
+			<PwaButton />
 		</div>
 	);
 }
