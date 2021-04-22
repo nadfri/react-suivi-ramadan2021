@@ -6,7 +6,7 @@ Pour pouvoir installer ce projet sur votre ordinateur, commencez par taper les c
 
 ### `npm install`
 
-Elle vous permettra d'installer toutes les dépendances nécessaires au bon fonctionnement du projet.
+Elle vous permettra d'installer toutes les dépendances nécessaires au bon fonctionnement du projet. Créer un compte sur Firebase, ainsi qu'une base de donnée Firestore, et mettre les infos de la db dans un fichier .env conformement au template .env_template.
 
 ### `npm start`
 
