@@ -79,7 +79,7 @@ function Calendar(props) {
 		return state.jours.map((day, index) => {
 			let firstDay = new Date(state.firstDay);
 			let date = new Date();
-			date.setDate(firstDay.getDate() + index);
+			date.setTime(firstDay.getTime() + index*1000*3600*24); //better than setDate
 			date = new Intl.DateTimeFormat('fr-FR',{
 			year: "2-digit",
 			month: "2-digit",
