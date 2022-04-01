@@ -1,9 +1,9 @@
 .Total {
-	border: 1px outset #5b88af;
+	// border: 1px outset #5b88af;
 	border-radius: 5px;
-	background-color: rgba(211, 224, 234, 0.3);
+	background-color: rgba(255, 193, 7, 0.2);
 	grid-area: 8 / 3 / 9 / 5;
-	box-shadow: 2px 1px 4px 0px #3e3e3e;
+	box-shadow: 0px 0px 5px 0px #3e3e3e;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -13,7 +13,7 @@
 		justify-content: space-between;
 		padding-left: 2px;
 		padding-right: 4px;
-		text-shadow: 1px 1px 0px #424242;
+		text-shadow: 0px 1px 0px #424242;
 		color: #2196f3;
 
 		.green {

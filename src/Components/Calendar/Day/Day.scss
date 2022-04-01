@@ -1,7 +1,7 @@
 .Day {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.4);
-	// box-shadow:  1px 1px 0 0 black;
+  // box-shadow:  1px 1px 0 0 black;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,13 +22,12 @@
   .poids-valid {
     text-align: left;
     position: relative;
-		font-weight: bold;
-
   }
   .poids {
     color: var(--primary);
-    font-size: 0.9rem;
-		padding-left: 2px;
+    font-size: 1rem;
+    padding-left: 2px;
+    font-weight: bold;
   }
 
   .valid {
@@ -51,13 +50,13 @@
   .success {
     color: #31ec48;
     opacity: 1;
-		text-shadow: 1px 1px 1px black;
+    text-shadow: 1px 1px 1px #646464;
   }
 
   .echec {
     color: #ff500d;
     opacity: 1;
-		text-shadow: 1px 1px 1px black;
+    text-shadow: 1px 1px 1px #646464;
   }
 
   .jour {
@@ -231,8 +230,14 @@
       font-size: 1.1rem;
     }
 
-		.date{
-			font-size: 0.8rem;
-		}
+    .date {
+      font-size: 0.8rem;
+    }
+
+    .poids-valid {
+      .poids {
+        font-size: 0.9rem;
+      }
+    }
   }
 }
