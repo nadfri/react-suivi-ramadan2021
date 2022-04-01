@@ -11,7 +11,7 @@ function Inscription(props) {
 	const [password2, setPassword2] = useState('');
 	const [firstPoids, setFirstPoids] = useState('');
 	const [error, setError] = useState('');
-	const firstDay = '2021-04-13' //First Day Ramadan 2021  YYYY-MM-DD
+	const firstDay = '2022-04-02' //First Day Ramadan 2022  YYYY-MM-DD
 	const data=
 	{
 		firstDay,

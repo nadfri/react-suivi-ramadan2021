@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Spirax&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
+:root{
+	--primary: #673ab7;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -17,6 +21,5 @@ body {
 	font-family: Lobster;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: #d3e0ea;
-
+	background-color: #c1c8ca;
 }

@@ -5,7 +5,8 @@
 		height: calc(100% - 35px);
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
-		grid-gap: 2px;
+		grid-gap: 5px;
+		padding: 5px;
 		margin-top: 3px;
 		animation: zoom 0.7s forwards;
 	}

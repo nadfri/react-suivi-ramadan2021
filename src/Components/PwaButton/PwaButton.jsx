@@ -27,7 +27,7 @@ function PwaButton() {
 
 	return (
 		<div className={supportsPWA ? 'PwaButton slide' : 'PwaButton'} onClick={click}>
-			Cliques ici pour Installer l'App 👍
+			Cliquez ici pour Installer l'App 👍
 		</div>
 	);
 }

@@ -10,7 +10,7 @@
 		background-color: rgba(211, 224, 234, 0.7);
 		padding: 5px 20px;
 		border-radius: 5px;
-		color: #2b9cff;
+		color: var(--primary);
 		font-size: 2rem;
 		font-family: 'Spirax', cursive;
 		box-shadow: 0 0 10px 0 black;
@@ -20,11 +20,11 @@
 		position: relative;
 		margin-top: 20%;
 		background-color: rgba(211, 224, 234, 0.7);
-		padding: 50px 20px 10px 20px;
+		padding: 20px 20px 10px ;
 		border-radius: 5px;
 		text-align: left;
 		width: 95%;
-		height: fit-content;
+
 
 		max-width: 500px;
 		display: flex;
@@ -34,7 +34,7 @@
 
 	label {
 		margin-bottom: 10px;
-		color: #2b9cff;
+		color: var(--primary);
 	}
 
 	input {
@@ -50,14 +50,14 @@
 		width: 100%;
 		padding: 5px;
 		border-radius: 5px;
-		background-color: #5ab4ea;
+		background-color: var(--primary);
 		color: white;
 		font-size: 1.2rem;
 		box-shadow: 0 0 5px 0 #3e3e3e;
 		font-family: Lobster;
 
 		&:disabled {
-			background-color: rgba(90, 180, 234, 0.4);
+			background-color: #683ab777;
 			cursor: not-allowed;
 			box-shadow: 0 0 5px 0 #a7a7a7;
 		}
@@ -65,18 +65,14 @@
 
 	.alert,
 	.success {
-		position: absolute;
 		font-style: italic;
 		font-weight: 400;
-		top: 5px;
-		left: 50%;
-		transform: translateX(-50%);
 		border-radius: 5px;
 		padding: 2px 10px;
-		width: 90%;
 		text-align: center;
 		box-shadow: 0 0 5px 0 #a7a7a7;
-		text-shadow: 1px 1px 1px #3e3e3e;
+		// text-shadow: 1px 1px 1px #3e3e3e;
+		font-family: Roboto;
 	}
 
 	.alert {
@@ -96,7 +92,7 @@
 
 	.deja {
 		text-decoration: none;
-		color: #2b9cff;
+		color: var(--primary);
 		font-style: italic;
 		text-align: right;
 		font-size: 0.9rem;

@@ -16,7 +16,7 @@
 		background-color: rgba(211, 224, 234, 0.7);
 		padding: 5px 20px;
 		border-radius: 5px;
-		color: #2b9cff;
+		color: var(--primary);
 		font-size: 2rem;
 		font-family: 'Spirax', cursive;
 		box-shadow: 0 0 10px 0 black;
@@ -38,7 +38,7 @@
 	}
 
 	.titre {
-		color: #2b9cff;
+		color: var(--primary);
 	}
 
 	input:not([type='radio']) {
@@ -58,7 +58,7 @@
 			border: none;
 			padding: 5px;
 			border-radius: 5px;
-			background-color: #5ab4ea;
+			background-color: var(--primary);
 			color: white;
 			font-size: 1.2rem;
 			box-shadow: 0 0 5px 0 #3e3e3e;
