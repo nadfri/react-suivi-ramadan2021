@@ -27,7 +27,7 @@
 		position: relative;
 		margin-top: 20%;
 		background-color: rgba(211, 224, 234, 0.7);
-		padding: 40px 10px 10px 10px;
+		padding: 20px 10px 20px;
 		border-radius: 5px;
 		text-align: left;
 		width: 95%;
@@ -102,6 +102,45 @@
 		background-color: rgba(255, 173, 173, 0.5);
 		text-shadow: 1px 1px 2px #3e3e3e;
 	}
+
+	.container-radio{
+		display: flex;
+		justify-content: space-around;
+		position: relative;
+		top: -5px;
+
+		label{
+			margin: 0;
+		}
+
+		img{
+			width: 35px;
+			height: 45px;
+			border-radius: 5px;
+		}
+
+
+
+		[type=radio] {
+			position: absolute;
+			opacity: 0;
+
+		}
+		
+		[type=radio]+img {
+			cursor: pointer;
+			outline: 2px solid transparent;
+			transition: all 0.5s;
+		}
+		
+		[type=radio]:checked + img {
+			outline: 2px solid var(--primary);
+		}
+
+	}
+
+
+
 }
 
 @keyframes zoom {

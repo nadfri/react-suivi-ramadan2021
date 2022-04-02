@@ -83,9 +83,9 @@ function Inscription(props) {
 					<input
 						type='email'
 						placeholder='Email'
-						required
 						autoComplete='username'
 						onChange={(e) => setEmail(e.target.value)}
+						required
 					/>
 				</label>
 				<label>
@@ -104,9 +104,9 @@ function Inscription(props) {
 						type='password'
 						placeholder='Mot de Passe'
 						minLength='6'
-						required
 						autoComplete='new-password'
 						onChange={(e) => setPassword(e.target.value)}
+						required
 					/>
 				</label>
 				<label>
@@ -115,9 +115,9 @@ function Inscription(props) {
 						type='password'
 						placeholder='Confirmation'
 						minLength='6'
-						required
 						autoComplete='new-password'
 						onChange={(e) => setPassword2(e.target.value)}
+						required
 					/>
 				</label>
 

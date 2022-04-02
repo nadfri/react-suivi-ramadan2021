@@ -1,7 +1,7 @@
 {
   "lang": "fr",
-  "theme_color": "#c1c8ca",
-  "background_color": "#c1c8ca",
+  "theme_color": "#F3E6D3",
+  "background_color": "#F3E6D3",
   "display": "standalone",
   "orientation": "portrait",
   "start_url": ".",

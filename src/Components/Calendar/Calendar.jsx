@@ -12,8 +12,8 @@ import Settings from './Settings/Settings';
 import Total from './Total/Total';
 
 
-function Calendar(props) {
-	const user = props.user;
+function Calendar({user,setWallpaper,wallpaper}) {
+
 
 	/*State*/
 	const [displaySettings, setDisplaySettings] = useState(false);
@@ -104,7 +104,7 @@ function Calendar(props) {
 		const copyState = { ...state };
 		copyState.jours[index].poids = value;
 		setState(copyState);
-		db.collection('users').doc(props.user.uid).update(copyState);
+		db.collection('users').doc(user.uid).update(copyState);
 	};
 
 	const checkValidDay = (index, valid, check) => {
@@ -112,7 +112,7 @@ function Calendar(props) {
 		copyState.jours[index].valid = valid;
 		copyState.jours[index].checked = check;
 		setState(copyState);
-		db.collection('users').doc(props.user.uid).update(copyState);
+		db.collection('users').doc(user.uid).update(copyState);
 	};
 
 
@@ -129,7 +129,7 @@ function Calendar(props) {
 			jour.checked = false;
 		}
 
-		db.collection('users').doc(props.user.uid).set(copyState);
+		db.collection('users').doc(user.uid).set(copyState);
 		setState(copyState);
 		setDisplaySettings(true)
 		
@@ -156,6 +156,8 @@ function Calendar(props) {
 					changeFirstConnect={changeFirstConnect}
 					suppressionDB={suppressionDB}
 					user={user}
+					setWallpaper={setWallpaper}
+					wallpaper= {wallpaper}
 				/>
 			) : null}
 			<InfoBar />
