@@ -24,3 +24,9 @@
 .slide {
 	transform: translateX(0%);
 }
+
+@media screen and (min-width: 768px) {
+  .PwaButton {
+    display: none;
+  }
+}
