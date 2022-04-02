@@ -24,3 +24,22 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	background-color: #c1c8ca;
 }
+
+/*Animations*/
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
