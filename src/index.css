@@ -25,6 +25,10 @@ body {
 	background-color: #c1c8ca;
 }
 
+button{
+	cursor: pointer;
+}
+
 /*Animations*/
 @keyframes zoom {
   from {
