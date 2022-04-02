@@ -3,6 +3,7 @@
 
 :root{
 	--primary: #673ab7;
+	--secondary: rgba(170, 206, 233, 0.7);
 }
 
 * {

@@ -90,18 +90,18 @@
     h1 {
       margin: 0;
       margin-top: 10px;
-      background-color: rgba(211, 224, 234, 0.7);
+      background-color: var(--secondary);
       padding: 5px 20px;
       border-radius: 5px;
       color: var(--primary);
       font-size: 2rem;
       font-family: "Spirax", cursive;
-      box-shadow: 0 0 10px 0 black;
+      box-shadow: 0 0 3px 0 black;
     }
 
     form {
       margin-top: 20%;
-      background-color: rgba(211, 224, 234, 0.7);
+      background-color: var(--secondary);
       padding: 20px 10px 10px 10px;
       border-radius: 5px;
       text-align: left;
@@ -111,12 +111,11 @@
       max-width: 500px;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 0 10px 0 black;
+      box-shadow: 0 0 3px 0 black;
     }
 
     .titre {
       color: var(--primary);
-      text-shadow: 1px 1px 2px #3e3e3e;
     }
 
     .formPoids {
