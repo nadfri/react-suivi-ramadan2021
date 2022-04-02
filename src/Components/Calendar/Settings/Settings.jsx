@@ -16,14 +16,11 @@ function Settings(props) {
   const [firstPoids, setFirstPoids] = useState(props.firstPoids);
   const [confirmation, setConfirmation] = useState(false);
   const [confirmationSupp, setConfirmationSupp] = useState(false);
-	const [radioWallpaper, setRadioWallpaper] = useState(props.wallpaper);
-
+  const [radioWallpaper, setRadioWallpaper] = useState(props.wallpaper);
 
   const handleWallPaper = (event) => {
     setRadioWallpaper(event.target.value);
   };
-
-
 
   //Formulaire
   const submitHandler = (e) => {
@@ -32,7 +29,7 @@ function Settings(props) {
     props.changeFirstPoids(firstPoids);
     props.changeFirstConnect(false);
     props.changeDisplaySettings(false);
-		props.setWallpaper(radioWallpaper);
+    props.setWallpaper(radioWallpaper);
     localStorage.setItem("wallpaper", radioWallpaper);
 
     db.collection("users")
@@ -55,7 +52,6 @@ function Settings(props) {
 
   //Gestion de l'event Annuler
   const cancel = (e) => {
-
     e.stopPropagation();
     if (e.target.id === "settings" || e.target.id === "annuler")
       props.changeDisplaySettings(false);
@@ -99,7 +95,7 @@ function Settings(props) {
               value="wallpaper"
               checked={radioWallpaper === "wallpaper"}
               onChange={handleWallPaper}
-							required
+              required
             />
             <img alt="" src={wallpaperMin} />
           </label>
@@ -108,9 +104,9 @@ function Settings(props) {
               type="radio"
               name="background"
               value="wallpaper1"
-            checked={radioWallpaper === "wallpaper1"}
-							onChange={handleWallPaper}
-							required
+              checked={radioWallpaper === "wallpaper1"}
+              onChange={handleWallPaper}
+              required
             />
             <img alt="" src={wallpaper1Min} />
           </label>
@@ -120,8 +116,8 @@ function Settings(props) {
               name="background"
               value="wallpaper2"
               checked={radioWallpaper === "wallpaper2"}
-							onChange={handleWallPaper}
-							required
+              onChange={handleWallPaper}
+              required
             />
             <img alt="" src={wallpaper2Min} />
           </label>
@@ -131,8 +127,8 @@ function Settings(props) {
               name="background"
               value="wallpaper3"
               checked={radioWallpaper === "wallpaper3"}
-							onChange={handleWallPaper}
-							required
+              onChange={handleWallPaper}
+              required
             />
             <img alt="" src={wallpaper3Min} />
           </label>
@@ -142,8 +138,8 @@ function Settings(props) {
               name="background"
               value="wallpaper4"
               checked={radioWallpaper === "wallpaper4"}
-							onChange={handleWallPaper}
-							required
+              onChange={handleWallPaper}
+              required
             />
             <img alt="" src={wallpaper4Min} />
           </label>
@@ -153,8 +149,8 @@ function Settings(props) {
               name="background"
               value="wallpaper5"
               checked={radioWallpaper === "wallpaper5"}
-							onChange={handleWallPaper}
-							required
+              onChange={handleWallPaper}
+              required
             />
             <img alt="" src={wallpaper5Min} />
           </label>
@@ -164,8 +160,8 @@ function Settings(props) {
               name="background"
               value="wallpaper6"
               checked={radioWallpaper === "wallpaper6"}
-							onChange={handleWallPaper}
-							required
+              onChange={handleWallPaper}
+              required
             />
             <img alt="" src={wallpaper6Min} />
           </label>
