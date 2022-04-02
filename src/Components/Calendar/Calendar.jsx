@@ -3,7 +3,7 @@ import { db } from "../../firebase";
 import React, { useState, useEffect } from "react";
 //CSS
 import "./Calendar.scss";
-import settingIco from "./Settings/settings.png";
+import settingIco from "./Settings/settings.svg";
 //Components
 import Day from "./Day/Day";
 import InfoBar from "./InfoBar/InfoBar";
