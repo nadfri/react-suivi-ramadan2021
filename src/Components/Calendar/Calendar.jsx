@@ -189,7 +189,9 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
           wallpaper={wallpaper}
         />
       ) : null}
+
       <InfoBar />
+      
       {state && (
         <div className='grid'>
           {calendrier(state)}{' '}
