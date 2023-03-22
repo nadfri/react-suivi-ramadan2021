@@ -123,10 +123,10 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
   const suppressionDB = () => {
     const copyState = { ...state };
     copyState.firstConnect = true;
-    copyState.firstPoids = null;
+    copyState.firstPoids = '';
 
     for (let jour of copyState.jours) {
-      jour.poids = null;
+      jour.poids = '';
       jour.valid = false;
       jour.checked = false;
     }
@@ -134,6 +134,29 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
     db.collection('users').doc(user.uid).set(copyState);
     setState(copyState);
     setDisplaySettings(true);
+  };
+
+  /*Suppression des datas de tous les users*/
+  const resetAllUsersData = async () => {
+    const usersSnapshot = await db.collection('users').get();
+
+    usersSnapshot.forEach(async (userDoc) => {
+      const user = userDoc.data();
+      const copyState = { ...user };
+      copyState.firstConnect = true;
+      copyState.firstPoids = '';
+      copyState.firstDay = '2023-03-23';
+
+      for (let jour of copyState.jours) {
+        jour.poids = '';
+        jour.valid = false;
+        jour.checked = false;
+      }
+
+      await db.collection('users').doc(userDoc.id).set(copyState);
+    });
+
+    console.log('Reset All Users Data');
   };
 
   /********************Rendu JSX********************/
@@ -148,6 +171,9 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
         alt='parameters'
         onClick={() => changeDisplaySettings(true)}
       />
+
+      {/*Reset all users data*/}
+      {/* <button onClick={resetAllUsersData}>Reset All Users Data</button> */}
 
       {displaySettings ? (
         <Settings
