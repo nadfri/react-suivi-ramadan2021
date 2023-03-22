@@ -1,18 +1,18 @@
 //Librairies
-import { db } from "../../firebase";
-import React, { useState, useEffect } from "react";
+import { db } from '../../firebase';
+import React, { useState, useEffect } from 'react';
 //CSS
-import "./Calendar.scss";
-import settingIco from "./Settings/settings.svg";
+import './Calendar.scss';
+import settingIco from './Settings/settings.svg';
 //Components
-import Day from "./Day/Day";
-import InfoBar from "./InfoBar/InfoBar";
-import Loader from "../Loader/Loader";
-import Settings from "./Settings/Settings";
-import Total from "./Total/Total";
-import ErrorModal from "../ErrorModal/ErrorModal";
+import Day from './Day/Day';
+import InfoBar from './InfoBar/InfoBar';
+import Loader from '../Loader/Loader';
+import Settings from './Settings/Settings';
+import Total from './Total/Total';
+import ErrorModal from '../ErrorModal/ErrorModal';
 
-function Calendar({ user, setWallpaper, wallpaper }) {
+export default function Calendar({ user, setWallpaper, wallpaper }) {
   /*State*/
   const [displaySettings, setDisplaySettings] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -33,7 +33,7 @@ function Calendar({ user, setWallpaper, wallpaper }) {
   /*Chargement des données*/
   useEffect(() => {
     setLoader(true);
-    db.collection("users")
+    db.collection('users')
       .doc(user.uid)
       .get()
       .then((doc) => {
@@ -48,7 +48,7 @@ function Calendar({ user, setWallpaper, wallpaper }) {
       });
 
     //WillUnmount
-    return () => console.log("CleanUp");
+    return () => console.log('CleanUp');
   }, [user]);
 
   /*Mise à jour des Totaux*/
@@ -83,10 +83,10 @@ function Calendar({ user, setWallpaper, wallpaper }) {
       let firstDay = new Date(state.firstDay);
       let date = new Date();
       date.setTime(firstDay.getTime() + index * 1000 * 3600 * 24); //better than setDate
-      date = new Intl.DateTimeFormat("fr-FR", {
-        year: "2-digit",
-        month: "2-digit",
-        day: "2-digit",
+      date = new Intl.DateTimeFormat('fr-FR', {
+        year: '2-digit',
+        month: '2-digit',
+        day: '2-digit',
       }).format(date);
 
       return (
@@ -108,7 +108,7 @@ function Calendar({ user, setWallpaper, wallpaper }) {
     const copyState = { ...state };
     copyState.jours[index].poids = value;
     setState(copyState);
-    db.collection("users").doc(user.uid).update(copyState);
+    db.collection('users').doc(user.uid).update(copyState);
   };
 
   const checkValidDay = (index, valid, check) => {
@@ -116,7 +116,7 @@ function Calendar({ user, setWallpaper, wallpaper }) {
     copyState.jours[index].valid = valid;
     copyState.jours[index].checked = check;
     setState(copyState);
-    db.collection("users").doc(user.uid).update(copyState);
+    db.collection('users').doc(user.uid).update(copyState);
   };
 
   /*Suppression De la Base de Données*/
@@ -131,49 +131,45 @@ function Calendar({ user, setWallpaper, wallpaper }) {
       jour.checked = false;
     }
 
-    db.collection("users").doc(user.uid).set(copyState);
+    db.collection('users').doc(user.uid).set(copyState);
     setState(copyState);
     setDisplaySettings(true);
   };
 
   /********************Rendu JSX********************/
   return (
+    <div className='Calendar'>
+      {loader && <Loader />}
 
-      <div className="Calendar">
-        {loader && <Loader />}
+      {error && <ErrorModal />}
+      <img
+        src={settingIco}
+        className='settingIco'
+        alt='parameters'
+        onClick={() => changeDisplaySettings(true)}
+      />
 
-				{error && <ErrorModal />}
-        <img
-          src={settingIco}
-          className="settingIco"
-          alt="parameters"
-          onClick={() => changeDisplaySettings(true)}
+      {displaySettings ? (
+        <Settings
+          firstDay={state.firstDay}
+          firstPoids={state.firstPoids}
+          changeFirstDay={changeFirstDay}
+          changeFirstPoids={changeFirstPoids}
+          changeDisplaySettings={changeDisplaySettings}
+          changeFirstConnect={changeFirstConnect}
+          suppressionDB={suppressionDB}
+          user={user}
+          setWallpaper={setWallpaper}
+          wallpaper={wallpaper}
         />
-
-        {displaySettings ? (
-          <Settings
-            firstDay={state.firstDay}
-            firstPoids={state.firstPoids}
-            changeFirstDay={changeFirstDay}
-            changeFirstPoids={changeFirstPoids}
-            changeDisplaySettings={changeDisplaySettings}
-            changeFirstConnect={changeFirstConnect}
-            suppressionDB={suppressionDB}
-            user={user}
-            setWallpaper={setWallpaper}
-            wallpaper={wallpaper}
-          />
-        ) : null}
-        <InfoBar />
-        {state && (
-          <div className="grid">
-            {calendrier(state)}{" "}
-            <Total jeuner={jeuner} manquer={manquer} pertePoids={pertePoids} />
-          </div>
-        )}
-      </div>
-
+      ) : null}
+      <InfoBar />
+      {state && (
+        <div className='grid'>
+          {calendrier(state)}{' '}
+          <Total jeuner={jeuner} manquer={manquer} pertePoids={pertePoids} />
+        </div>
+      )}
+    </div>
   );
 }
-
-export default Calendar;
