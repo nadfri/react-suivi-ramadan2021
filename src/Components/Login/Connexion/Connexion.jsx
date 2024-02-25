@@ -16,8 +16,7 @@ function Connexion(props) {
 		fire
 			.auth()
 			.signInWithEmailAndPassword(email, password)
-			.then((res) => {
-				localStorage.setItem('user', JSON.stringify(res.user));
+			.then(() => {
 				props.history.push('/calendar');
 			})
 			.catch((error) => setError(error.message));

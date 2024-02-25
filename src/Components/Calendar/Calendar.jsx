@@ -1,6 +1,7 @@
 //Librairies
 import { db } from '../../firebase';
 import React, { useState, useEffect } from 'react';
+import { FIRST_DAY, USERS } from '../../utils';
 //CSS
 import './Calendar.scss';
 import settingIco from './Settings/settings.svg';
@@ -11,6 +12,8 @@ import Loader from '../Loader/Loader';
 import Settings from './Settings/Settings';
 import Total from './Total/Total';
 import ErrorModal from '../ErrorModal/ErrorModal';
+
+console.log('DB:', USERS)
 
 export default function Calendar({ user, setWallpaper, wallpaper }) {
   /*State*/
@@ -25,15 +28,18 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
   /*Gestion du Settings*/
   const changeFirstPoids = (value) =>
     setState((prev) => ({ ...prev, firstPoids: value }));
+
   const changeFirstDay = (value) => setState((prev) => ({ ...prev, firstDay: value }));
+
   const changeFirstConnect = (value) =>
     setState((prev) => ({ ...prev, firstConnect: value }));
+
   const changeDisplaySettings = (value) => setDisplaySettings(value);
 
   /*Chargement des données*/
   useEffect(() => {
     setLoader(true);
-    db.collection('users')
+    db.collection(USERS)
       .doc(user.uid)
       .get()
       .then((doc) => {
@@ -108,7 +114,7 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
     const copyState = { ...state };
     copyState.jours[index].poids = value;
     setState(copyState);
-    db.collection('users').doc(user.uid).update(copyState);
+    db.collection(USERS).doc(user.uid).update(copyState);
   };
 
   const checkValidDay = (index, valid, check) => {
@@ -116,7 +122,7 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
     copyState.jours[index].valid = valid;
     copyState.jours[index].checked = check;
     setState(copyState);
-    db.collection('users').doc(user.uid).update(copyState);
+    db.collection(USERS).doc(user.uid).update(copyState);
   };
 
   /*Suppression De la Base de Données*/
@@ -131,21 +137,22 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
       jour.checked = false;
     }
 
-    db.collection('users').doc(user.uid).set(copyState);
+    db.collection(USERS).doc(user.uid).set(copyState);
     setState(copyState);
     setDisplaySettings(true);
   };
 
   /*Suppression des datas de tous les users*/
   const resetAllUsersData = async () => {
-    const usersSnapshot = await db.collection('users').get();
+    //Precisier quels users sont concernés
+    const usersSnapshot = await db.collection(USERS).get();
 
     usersSnapshot.forEach(async (userDoc) => {
       const user = userDoc.data();
       const copyState = { ...user };
       copyState.firstConnect = true;
       copyState.firstPoids = '';
-      copyState.firstDay = '2023-03-23';
+      copyState.firstDay = FIRST_DAY;
 
       for (let jour of copyState.jours) {
         jour.poids = '';
@@ -153,10 +160,21 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
         jour.checked = false;
       }
 
-      await db.collection('users').doc(userDoc.id).set(copyState);
+      await db.collection(USERS).doc(userDoc.id).set(copyState);
     });
 
     console.log('Reset All Users Data');
+  };
+
+  const copyUsersToUsersTest = async () => {
+    db.collection('users')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          // Copiez chaque document dans la collection 'users-test'
+          db.collection('users-test').doc(doc.id).set(doc.data());
+        });
+      });
   };
 
   /********************Rendu JSX********************/
@@ -174,8 +192,9 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
 
       {/*Reset all users data*/}
       {/* <button onClick={resetAllUsersData}>Reset All Users Data</button> */}
+      {/* <button onClick={copyUsersToUsersTest}>Copy Users to DB TEST</button> */}
 
-      {displaySettings ? (
+      {displaySettings && (
         <Settings
           firstDay={state.firstDay}
           firstPoids={state.firstPoids}
@@ -188,10 +207,10 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
           setWallpaper={setWallpaper}
           wallpaper={wallpaper}
         />
-      ) : null}
+      )}
 
       <InfoBar />
-      
+
       {state && (
         <div className='grid'>
           {calendrier(state)}{' '}

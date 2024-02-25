@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { db } from '../../../firebase';
 import './Settings.scss';
+import { USERS } from '../../../utils';
 
 import wallpaperMin from '../../../wallpapers/wallpaper.min.webp';
 import wallpaper1Min from '../../../wallpapers/wallpaper1.min.webp';
@@ -32,7 +33,7 @@ export default function Settings(props) {
     props.setWallpaper(radioWallpaper);
     localStorage.setItem('wallpaper', radioWallpaper);
 
-    db.collection('users')
+    db.collection(USERS)
       .doc(props.user.uid)
       .update({ firstPoids, firstDay, firstConnect: false });
   };
