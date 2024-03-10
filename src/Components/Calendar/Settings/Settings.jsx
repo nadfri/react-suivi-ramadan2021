@@ -5,13 +5,20 @@ import { USERS } from '../../../utils';
 import { useTheme } from '../../../Context/Context';
 import { themes } from '../../../themes/themes';
 
+import { BsEnvelopeAtFill } from 'react-icons/bs';
+import { FaLinkedin } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
+import { IoLogoYoutube } from 'react-icons/io';
+import { FaMedal } from 'react-icons/fa';
+import { BiSolidBookHeart } from 'react-icons/bi';
+
 export default function Settings(props) {
   const { theme, setTheme } = useTheme();
   const [radioThemeID, setRadioThemeID] = useState(theme.id);
 
   const [firstDay, setFirstDay] = useState(props.firstDay);
   const [firstPoids, setFirstPoids] = useState(props.firstPoids);
-  
+
   const [confirmation, setConfirmation] = useState(false);
   const [confirmationSupp, setConfirmationSupp] = useState(false);
 
@@ -115,6 +122,43 @@ export default function Settings(props) {
             Confirmer la Suppression
           </button>
         ) : null}
+
+        <a
+          href='https://quizzislam.netlify.app/'
+          className='link'
+          target='_blank'
+          rel='noreferrer'>
+          Tester vos connaissances avec ce Quizz <FaMedal className='icon' />
+        </a>
+
+        <p className='about'>
+          Développé par{' '}
+          <a href='mailto:nadfri@gmail.com'>
+            NadfriJS
+            <BsEnvelopeAtFill className='icon' />
+          </a>
+          <a
+            href='https://www.linkedin.com/in/nader-frigui-23509025/'
+            target='_blank'
+            rel='noreferrer'>
+            <FaLinkedin className='icon' />
+          </a>
+          <a href='https://github.com/nadfri' target='_blank' rel='noreferrer'>
+            <FaGithub className='icon' />
+          </a>
+          <a href='https://www.youtube.com/c/nadfrijs' target='_blank' rel='noreferrer'>
+            <IoLogoYoutube className='icon' />
+          </a>
+        </p>
+
+        <a
+          href='https://masjidbox.com/donations/mosquee-de-savigny-le-temple/travaux-de-finition-dagrandissement-de-lecolecollege-de-la-mosquee-de-savigny-le-temple'
+          target='_blank'
+          rel='noreferrer'
+          className='link mt-0'>
+          Participer à la construction d'une école musulmane{' '}
+          <BiSolidBookHeart className='icon' />
+        </a>
       </form>
     </div>
   );

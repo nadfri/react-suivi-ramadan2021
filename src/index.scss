@@ -5,7 +5,7 @@
   --color-red: #ff500d;
   --bg-color: #c1c8ca;
   --bg-secondary: rgba(255, 255, 255, 0.8);
-  --box-shadow-color: var(--box-shadow-color);
+  --box-shadow-color: #494944;
   --color-theme-1: #2563eb;
   --color-theme-2: #673ab7;
 }
@@ -108,5 +108,14 @@ button {
   }
   to {
     opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

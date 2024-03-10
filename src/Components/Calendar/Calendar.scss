@@ -15,11 +15,15 @@
   .settingIco {
     position: absolute;
     top: 2px;
-    left: 3%;
-    height: 30px;
+    left: 6px;
+    height: 34px;
     border-radius: 50%;
-    box-shadow: 1px 1px 2px 0px black;
     cursor: pointer;
+
+    animation: rotate 1s ease-in-out;
+    animation-iteration-count: 3;
+
+    border:solid white 1px
   }
 }
 

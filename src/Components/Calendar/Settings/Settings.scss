@@ -127,6 +127,25 @@
       outline: 2px solid var(--color-theme-1);
     }
   }
+
+  .link{
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .mt-0{
+    margin-top: 0;
+  }
+
+  .about{
+    text-align: center;
+  }
+
+  .icon{
+    position: relative;
+    top: 2px;
+    margin-left: 5px;
+  }
 }
 
 @keyframes zoom {
