@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Spirax&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+:root {
+  --color-red: #ff500d;
+  --bg-color: #c1c8ca;
+  --bg-secondary: rgba(255, 255, 255, 0.8);
+  --box-shadow-color: var(--box-shadow-color);
+  --color-theme-1: #2563eb;
+  --color-theme-2: #673ab7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Lobster;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color);
+}
+
+button {
+  color: white;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    box-shadow: 0 0 5px 0 #a7a7a7;
+    opacity: 0.5;
+  }
+}
+
+.btn-primary {
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 5px;
+  width: 80%;
+  box-shadow: 0 0 5px 0 var(--box-shadow-color);
+  font-size: 1.2rem;
+}
+
+.theme1,
+.theme3,
+.theme4,
+.theme5,
+.theme6,
+.theme7 {
+  color: var(--color-theme-1);
+
+  a {
+    color: var(--color-theme-1);
+  }
+
+  button,
+  .btn-primary {
+    color: white;
+    background-color: var(--color-theme-1);
+  }
+
+  .react-switch-handle {
+    background: var(--color-theme-1) !important;
+  }
+}
+
+/*THEME 2*/
+.theme2,.theme8 {
+  color: var(--color-theme-2);
+
+  a {
+    color: var(--color-theme-2);
+  }
+
+  button,
+  .btn-primary {
+    color: white;
+    background-color: var(--color-theme-2);
+  }
+
+  .react-switch-handle {
+    background: var(--color-theme-2) !important;
+  }
+}
+
+
+
+/*Animations*/
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

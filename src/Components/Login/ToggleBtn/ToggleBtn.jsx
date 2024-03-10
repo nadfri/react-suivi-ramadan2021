@@ -24,7 +24,7 @@ function ToggleBtn() {
         onChange={logOut}
         uncheckedIcon={false}
         checkedIcon={false}
-        onHandleColor='#2693e6'
+
         onColor='#86ffc6'
         offColor='#f79e8e'
         boxShadow='0px 1px 5px rgba(0, 0, 0, 0.6)'

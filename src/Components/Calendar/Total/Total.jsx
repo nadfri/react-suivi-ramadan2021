@@ -7,7 +7,7 @@ function Total(props) {
 			<div className='line'>
 				Jours Jeunés:
 				<span>
-					<span className='green'>{props.jeuner}</span>/30
+					<span className='white'>{props.jeuner}</span>/30
 				</span>
 			</div>
 			<div className='line'>

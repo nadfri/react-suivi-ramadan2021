@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import "./Day.scss";
+import React, { useState } from 'react';
+import './Day.scss';
 
 function Day(props) {
   const { poids, valid, checked, jour } = props.state;
 
   //State
   const [modalDisplay, setModalDisplay] = useState(false);
-  const [selected, setSelected] = useState("oui");
+  const [selected, setSelected] = useState('oui');
   const [poidsUpdate, setPoidsUpdate] = useState(props.firstPoids);
 
   //Gestion des classes CSS
   let classesBack, classesIcons;
   if (valid) {
-    classesBack = "backSuccess";
-    classesIcons = "success";
+    classesBack = 'backSuccess';
+    classesIcons = 'success';
   } else if (!valid && checked) {
-    classesIcons = "echec";
-    classesBack = "backEchec";
+    classesIcons = 'echec';
+    classesBack = 'backEchec';
   } else {
-    classesIcons = "";
-    classesBack = "";
+    classesIcons = '';
+    classesBack = '';
   }
 
   //Soumission Formulaire
@@ -27,12 +27,12 @@ function Day(props) {
     e.preventDefault();
     setModalDisplay(false);
 
-    if (selected === "oui") {
+    if (selected === 'oui') {
       props.checkValidDay(props.index, true, true);
       props.changeDayPoids(props.index, poidsUpdate);
-    } else if (selected === "reset") {
+    } else if (selected === 'reset') {
       props.checkValidDay(props.index, false, false);
-      props.changeDayPoids(props.index, "");
+      props.changeDayPoids(props.index, '');
     } else {
       props.checkValidDay(props.index, false, true);
       props.changeDayPoids(props.index, poidsUpdate);
@@ -46,79 +46,79 @@ function Day(props) {
   };
   const cancelClick = (e) => {
     e.stopPropagation();
-    if (e.target.id === "modaleAnnuler" || e.target.id === "modale")
+    if (e.target.id === 'modaleAnnuler' || e.target.id === 'modale')
       setModalDisplay(false);
   };
 
   /********************Rendu JSX********************/
   return (
     <div className={`Day ${classesBack}`} onClick={openModal}>
-      <div className="date">{props.date}</div>
-      <div className="jour">{jour}</div>
-      <div className="poids-valid">
-        <span className="poids">{poids}Kgs</span>
-        <span className={`valid ${classesIcons}`}>{valid ? "✔" : "✘"}</span>
+      <div className='date'>{props.date}</div>
+      <div className='jour'>{jour}</div>
+      <div className='poids-valid'>
+        {poids > 0 && <span className='poids'>{poids}kgs</span>}
+        <span className={`valid ${classesIcons}`}>{valid ? '✔' : '✘'}</span>
       </div>
 
       {/***********************MODALE******************/}
       {modalDisplay && (
-        <div className="Modale" onClick={cancelClick} id="modale">
+        <div className='Modale' onClick={cancelClick} id='modale'>
           <h1>Le {jour} Ramadan</h1>
-          <form onSubmit={submitHandler} className="form">
-            <div className="titre"> Avez vous jeuner ce jour: ({props.date})</div>
-            <div className="buttons-radio">
-              <div className="button-radio green">
+          <form onSubmit={submitHandler} className='form'>
+            <div className='titre'> Avez vous jeuner ce jour: ({props.date})</div>
+            <div className='buttons-radio'>
+              <div className='button-radio green'>
                 <input
-                  type="radio"
-                  id="oui"
-                  name="check"
-                  value="oui"
-                  checked={selected === "oui"}
+                  type='radio'
+                  id='oui'
+                  name='check'
+                  value='oui'
+                  checked={selected === 'oui'}
                   onChange={(e) => setSelected(e.target.value)}
                 />
-                <label htmlFor="oui">Oui</label>
+                <label htmlFor='oui'>Oui</label>
               </div>
-              <div className="button-radio gray">
+              <div className='button-radio gray'>
                 <input
-                  type="radio"
-                  id="reset"
-                  name="check"
-                  value="reset"
-                  checked={selected === "reset"}
+                  type='radio'
+                  id='reset'
+                  name='check'
+                  value='reset'
+                  checked={selected === 'reset'}
                   onChange={(e) => setSelected(e.target.value)}
                 />
-                <label htmlFor="reset">Reset</label>
+                <label htmlFor='reset'>Reset</label>
               </div>
-              <div className="button-radio red">
+              <div className='button-radio red'>
                 <input
-                  type="radio"
-                  id="non"
-                  name="check"
-                  value="non"
-                  checked={selected === "non"}
+                  type='radio'
+                  id='non'
+                  name='check'
+                  value='non'
+                  checked={selected === 'non'}
                   onChange={(e) => setSelected(e.target.value)}
                 />
-                <label htmlFor="non">Non</label>
+                <label htmlFor='non'>Non</label>
               </div>
             </div>
 
-            <div className="formPoids">
-              <label className="titre">Votre Poids aujourd'hui:</label>
-              <div className="input">
+            <div className='formPoids'>
+              <label className='titre'>Votre Poids aujourd'hui:</label>
+              <div className='input'>
                 <input
-                  type="number"
-                  step="0.1"
-                  placeholder="Poids"
+                  type='number'
+                  step='0.1'
+                  placeholder='Poids'
                   value={poidsUpdate}
                   onChange={(e) => setPoidsUpdate(e.target.value)}
                 />
-                <span className="kgs">Kgs</span>
+                <span className='kgs'>Kgs</span>
               </div>
             </div>
 
-            <div className="buttons">
-              <button type="submit">Confirmer</button>
-              <button type="button" onClick={cancelClick} id="modaleAnnuler">
+            <div className='buttons'>
+              <button type='submit'>Confirmer</button>
+              <button type='button' onClick={cancelClick} id='modaleAnnuler'>
                 Annuler
               </button>
             </div>

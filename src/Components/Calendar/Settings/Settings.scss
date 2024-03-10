@@ -11,19 +11,18 @@
   h1 {
     margin: 0;
     margin-top: 10px;
-    background-color: var(--secondary);
+    background-color: var(--bg-secondary);
     padding: 5px 20px;
     border-radius: 5px;
-    color: var(--primary);
     font-size: 2rem;
-    font-family: "Spirax", cursive;
+    font-family: 'Spirax', cursive;
     box-shadow: 0 0 3px 0 black;
   }
 
   form {
     position: relative;
     margin-top: 20%;
-    background-color: var(--secondary);
+    background-color: var(--bg-secondary);
     padding: 40px 10px 20px 10px;
     border-radius: 5px;
     text-align: left;
@@ -39,7 +38,6 @@
 
   label {
     margin-bottom: 10px;
-    color: var(--primary);
   }
 
   input {
@@ -59,10 +57,8 @@
       border: none;
       padding: 5px;
       border-radius: 5px;
-      background-color: var(--primary);
-      color: white;
       font-size: 1.2rem;
-      box-shadow: 0 0 5px 0 #3e3e3e;
+      box-shadow: 0 0 5px 0 var(--box-shadow-color);
       font-family: Lobster;
       width: 48%;
     }
@@ -74,7 +70,7 @@
     border-radius: 5px;
     margin-top: 15px;
     border: none;
-    box-shadow: 0 0 5px 0 #3e3e3e;
+    box-shadow: 0 0 5px 0 var(--box-shadow-color);
     font-family: Lobster;
     padding: 5px;
   }
@@ -116,19 +112,19 @@
       border-radius: 5px;
     }
 
-    [type="radio"] {
+    [type='radio'] {
       position: absolute;
       opacity: 0;
     }
 
-    [type="radio"] + img {
+    [type='radio'] + img {
       cursor: pointer;
       outline: 2px solid transparent;
       transition: all 0.5s;
     }
 
-    [type="radio"]:checked + img {
-      outline: 2px solid var(--primary);
+    [type='radio']:checked + img {
+      outline: 2px solid var(--color-theme-1);
     }
   }
 }

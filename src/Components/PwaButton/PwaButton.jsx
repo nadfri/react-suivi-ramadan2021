@@ -26,9 +26,9 @@ function PwaButton() {
 	const click = () => promptInstall.prompt();
 
 	return (
-		<div className={supportsPWA ? 'PwaButton slide' : 'PwaButton'} onClick={click}>
+		<button className={supportsPWA ? 'PwaButton slide' : 'PwaButton'} onClick={click}>
 			Cliquez ici pour Installer l'App 👍
-		</div>
+		</button>
 	);
 }
 

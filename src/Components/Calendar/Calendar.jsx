@@ -15,7 +15,7 @@ import Settings from './Settings/Settings';
 
 console.log('DB:', USERS);
 
-export default function Calendar({ user, setTheme, wallpaper }) {
+export default function Calendar({ user }) {
   /*State*/
   const [displaySettings, setDisplaySettings] = useState(false);
   const [loader, setLoader] = useState(false);

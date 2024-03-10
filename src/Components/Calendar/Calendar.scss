@@ -1,32 +1,33 @@
 .Calendar {
-	height: 100%;
+  height: 100%;
 
-	.grid {
-		height: calc(100% - 35px);
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-gap: 5px;
-		padding: 5px;
-		margin-top: 3px;
-		animation: zoom 0.7s forwards;
-	}
+  .grid {
+    height: calc(100% - 35px);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-gap: 5px;
+    padding: 5px;
+    margin-top: 3px;
+    animation: zoom 0.7s forwards;
+  }
 
-	.settingIco {
-		position: absolute;
-		top: 2px;
-		left: 3%;
-		height: 30px;
-		border-radius: 50%;
-		box-shadow: 1px 1px 2px 0px black;
-		cursor: pointer;
-	}
+  .settingIco {
+    position: absolute;
+    top: 2px;
+    left: 3%;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 2px 0px black;
+    cursor: pointer;
+  }
 }
 
 @keyframes zoom {
-	from {
-		transform: scale(0);
-	}
-	to {
-		transform: scale(1);
-	}
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }

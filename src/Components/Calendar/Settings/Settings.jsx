@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { db } from '../../../firebase';
 import { USERS } from '../../../utils';
 import { useTheme } from '../../../Context/Context';
-import { themes } from '../../../wallpapers/themes';
+import { themes } from '../../../themes/themes';
 
 export default function Settings(props) {
   const { theme, setTheme } = useTheme();
@@ -15,7 +15,7 @@ export default function Settings(props) {
   const [confirmation, setConfirmation] = useState(false);
   const [confirmationSupp, setConfirmationSupp] = useState(false);
 
-  const handleWallPaper = (event) => {
+  const handleTheme = (event) => {
     setRadioThemeID(event.target.value);
   };
 
@@ -93,7 +93,7 @@ export default function Settings(props) {
                 name='radio-theme'
                 value={theme.id}
                 checked={radioThemeID === theme.id}
-                onChange={handleWallPaper}
+                onChange={handleTheme}
                 required
               />
               <img alt='' src={theme.srcMin} />

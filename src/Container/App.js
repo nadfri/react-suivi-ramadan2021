@@ -32,7 +32,7 @@ export default function App() {
   };
 
   return (
-    <div className='App' style={{ backgroundImage: `url(${theme.src})` }}>
+    <div className={`App ${theme.id}`} style={{ backgroundImage: `url(${theme.src})` }}>
       <BrowserRouter>
         <ToggleBtn />
         <PwaButton />
