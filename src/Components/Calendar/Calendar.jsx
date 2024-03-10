@@ -9,13 +9,13 @@ import settingIco from './Settings/settings.svg';
 import Day from './Day/Day';
 import InfoBar from './InfoBar/InfoBar';
 import Loader from '../Loader/Loader';
-import Settings from './Settings/Settings';
 import Total from './Total/Total';
 import ErrorModal from '../ErrorModal/ErrorModal';
+import Settings from './Settings/Settings';
 
-console.log('DB:', USERS)
+console.log('DB:', USERS);
 
-export default function Calendar({ user, setWallpaper, wallpaper }) {
+export default function Calendar({ user, setTheme, wallpaper }) {
   /*State*/
   const [displaySettings, setDisplaySettings] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -204,8 +204,6 @@ export default function Calendar({ user, setWallpaper, wallpaper }) {
           changeFirstConnect={changeFirstConnect}
           suppressionDB={suppressionDB}
           user={user}
-          setWallpaper={setWallpaper}
-          wallpaper={wallpaper}
         />
       )}
 

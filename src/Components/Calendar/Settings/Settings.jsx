@@ -1,26 +1,22 @@
+import './Settings.scss';
 import React, { useState } from 'react';
 import { db } from '../../../firebase';
-import './Settings.scss';
 import { USERS } from '../../../utils';
-
-import wallpaperMin from '../../../wallpapers/wallpaper.min.webp';
-import wallpaper1Min from '../../../wallpapers/wallpaper1.min.webp';
-import wallpaper2Min from '../../../wallpapers/wallpaper2.min.webp';
-import wallpaper3Min from '../../../wallpapers/wallpaper3.min.webp';
-import wallpaper4Min from '../../../wallpapers/wallpaper4.min.webp';
-import wallpaper5Min from '../../../wallpapers/wallpaper5.min.webp';
-import wallpaper6Min from '../../../wallpapers/wallpaper6.min.webp';
+import { useTheme } from '../../../Context/Context';
+import { themes } from '../../../wallpapers/themes';
 
 export default function Settings(props) {
-  //State
+  const { theme, setTheme } = useTheme();
+  const [radioThemeID, setRadioThemeID] = useState(theme.id);
+
   const [firstDay, setFirstDay] = useState(props.firstDay);
   const [firstPoids, setFirstPoids] = useState(props.firstPoids);
+  
   const [confirmation, setConfirmation] = useState(false);
   const [confirmationSupp, setConfirmationSupp] = useState(false);
-  const [radioWallpaper, setRadioWallpaper] = useState(props.wallpaper);
 
   const handleWallPaper = (event) => {
-    setRadioWallpaper(event.target.value);
+    setRadioThemeID(event.target.value);
   };
 
   //Formulaire
@@ -30,8 +26,9 @@ export default function Settings(props) {
     props.changeFirstPoids(firstPoids);
     props.changeFirstConnect(false);
     props.changeDisplaySettings(false);
-    props.setWallpaper(radioWallpaper);
-    localStorage.setItem('wallpaper', radioWallpaper);
+
+    setTheme(themes.find((theme) => theme.id === radioThemeID));
+    localStorage.setItem('themeID', radioThemeID);
 
     db.collection(USERS)
       .doc(props.user.uid)
@@ -89,83 +86,19 @@ export default function Settings(props) {
 
         <label>Choisissez un fond d'écran</label>
         <div className='container-radio'>
-          <label>
-            <input
-              type='radio'
-              name='background'
-              value='wallpaper0'
-              checked={radioWallpaper === 'wallpaper0'}
-              onChange={handleWallPaper}
-              required
-            />
-            <img alt='' src={wallpaperMin} />
-          </label>
-          <label>
-            <input
-              type='radio'
-              name='background'
-              value='wallpaper1'
-              checked={radioWallpaper === 'wallpaper1'}
-              onChange={handleWallPaper}
-              required
-            />
-            <img alt='' src={wallpaper1Min} />
-          </label>
-          <label>
-            <input
-              type='radio'
-              name='background'
-              value='wallpaper2'
-              checked={radioWallpaper === 'wallpaper2'}
-              onChange={handleWallPaper}
-              required
-            />
-            <img alt='' src={wallpaper2Min} />
-          </label>
-          <label>
-            <input
-              type='radio'
-              name='background'
-              value='wallpaper3'
-              checked={radioWallpaper === 'wallpaper3'}
-              onChange={handleWallPaper}
-              required
-            />
-            <img alt='' src={wallpaper3Min} />
-          </label>
-          <label>
-            <input
-              type='radio'
-              name='background'
-              value='wallpaper4'
-              checked={radioWallpaper === 'wallpaper4'}
-              onChange={handleWallPaper}
-              required
-            />
-            <img alt='' src={wallpaper4Min} />
-          </label>
-          <label>
-            <input
-              type='radio'
-              name='background'
-              value='wallpaper5'
-              checked={radioWallpaper === 'wallpaper5'}
-              onChange={handleWallPaper}
-              required
-            />
-            <img alt='' src={wallpaper5Min} />
-          </label>
-          <label>
-            <input
-              type='radio'
-              name='background'
-              value='wallpaper6'
-              checked={radioWallpaper === 'wallpaper6'}
-              onChange={handleWallPaper}
-              required
-            />
-            <img alt='' src={wallpaper6Min} />
-          </label>
+          {themes.map((theme) => (
+            <label key={theme.id}>
+              <input
+                type='radio'
+                name='radio-theme'
+                value={theme.id}
+                checked={radioThemeID === theme.id}
+                onChange={handleWallPaper}
+                required
+              />
+              <img alt='' src={theme.srcMin} />
+            </label>
+          ))}
         </div>
 
         <div className='buttons'>
