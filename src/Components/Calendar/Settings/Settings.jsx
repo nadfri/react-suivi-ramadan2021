@@ -152,11 +152,11 @@ export default function Settings(props) {
         </p>
 
         <a
-          href='https://masjidbox.com/donations/mosquee-de-savigny-le-temple/travaux-de-finition-dagrandissement-de-lecolecollege-de-la-mosquee-de-savigny-le-temple'
+          href='https://masjidbox.com/donations/mosquee-de-savigny-le-temple/faites-un-don-pour-votre-mosquee'
           target='_blank'
           rel='noreferrer'
           className='link mt-0'>
-          Participer à la construction d'une école musulmane{' '}
+          Participer à la construction d'un collège musulman{' '}
           <BiSolidBookHeart className='icon' />
         </a>
       </form>
