@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import moment from 'moment-hijri';
 import './InfoBar.scss';
+import { MdOutlineUpdate } from 'react-icons/md';
 
 const getIslamicDate = () => {
   const islamicDate = moment().format('iYYYY/iM/iD');
@@ -52,7 +53,10 @@ export default function InfoBar() {
 
   return (
     <div className='InfoBar' onClick={() => setToggle(!toggle)}>
-      <span className='date'>{toggle ? islamic : french}</span>
+      <span className='date'>
+        {toggle ? islamic : french}
+        <MdOutlineUpdate className='icon' />
+      </span>
     </div>
   );
 }

@@ -145,7 +145,8 @@ export default function Calendar({ user }) {
   /*Suppression des datas de tous les users*/
   const resetAllUsersData = async () => {
     //Precisier quels users sont concernés
-    const usersSnapshot = await db.collection(USERS).get();
+    const usersToDelete = "users-test"; 
+    const usersSnapshot = await db.collection(usersToDelete).get();
 
     usersSnapshot.forEach(async (userDoc) => {
       const user = userDoc.data();
@@ -160,10 +161,10 @@ export default function Calendar({ user }) {
         jour.checked = false;
       }
 
-      await db.collection(USERS).doc(userDoc.id).set(copyState);
+      await db.collection(usersToDelete).doc(userDoc.id).set(copyState);
     });
 
-    console.log('Reset All Users Data');
+    console.log('Reset All Users Data', usersToDelete);
   };
 
   const copyUsersToUsersTest = async () => {
@@ -175,6 +176,8 @@ export default function Calendar({ user }) {
           db.collection('users-test').doc(doc.id).set(doc.data());
         });
       });
+
+    console.log('Copy Users to DB TEST');
   };
 
   /********************Rendu JSX********************/
@@ -191,8 +194,8 @@ export default function Calendar({ user }) {
       />
 
       {/*Reset all users data*/}
-      {/* <button onClick={resetAllUsersData}>Reset All Users Data</button> */}
-      {/* <button onClick={copyUsersToUsersTest}>Copy Users to DB TEST</button> */}
+      {/* <button onClick={resetAllUsersData}>Reset All Users Data</button> 
+      <button onClick={copyUsersToUsersTest}>Copy Users to DB TEST</button> */}
 
       {displaySettings && (
         <Settings
