@@ -186,11 +186,14 @@ export default function Calendar({ user }) {
       {loader && <Loader />}
 
       {error && <ErrorModal />}
+
       <img
         src={settingIco}
         className='settingIco'
         alt='parameters'
         onClick={() => changeDisplaySettings(true)}
+        role='button'
+        aria-pressed={displaySettings}
       />
 
       {/*Reset all users data*/}

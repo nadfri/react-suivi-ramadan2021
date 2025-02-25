@@ -52,7 +52,7 @@ export default function InfoBar() {
   const [toggle, setToggle] = useState(true);
 
   return (
-    <div className='InfoBar' onClick={() => setToggle(!toggle)}>
+    <div className='InfoBar' onClick={() => setToggle(!toggle)} role="button" aria-pressed={toggle}>
       <span className='date'>
         {toggle ? islamic : french}
         <MdOutlineUpdate className='icon' />

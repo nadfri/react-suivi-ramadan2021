@@ -64,7 +64,7 @@ export default function Settings(props) {
 
   /********************Rendu JSX********************/
   return (
-    <div className='Settings' onClick={cancel} id='settings'>
+    <div className='Settings' onClick={cancel} id='settings' role='button' aria-pressed={props.displaySettings}>
       <h1>Paramètres</h1>
       <form onSubmit={submitHandler} className='form'>
         {confirmation && (

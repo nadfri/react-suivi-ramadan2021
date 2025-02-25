@@ -52,7 +52,7 @@ function Day(props) {
 
   /********************Rendu JSX********************/
   return (
-    <div className={`Day ${classesBack}`} onClick={openModal}>
+    <div className={`Day ${classesBack}`} onClick={openModal} role='button' aria-pressed={modalDisplay}>
       <div className='date'>{props.date}</div>
       <div className='jour'>{jour}</div>
       <div className='poids-valid'>
