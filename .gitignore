@@ -24,3 +24,8 @@ yarn-error.log*
 
 # API KEYS
 .env
+
+# Firebase Admin
+scripts/
+user-emails.txt
+*-firebase-adminsdk-*.json
