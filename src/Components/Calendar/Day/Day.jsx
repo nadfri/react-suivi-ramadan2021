@@ -1,13 +1,40 @@
 import React, { useState } from 'react';
 import './Day.scss';
 
-function Day(props) {
-  const { poids, valid, checked, jour } = props.state;
+function Day({ data }) {
+  // Déstructuration simplifiée
+  const {
+    poids,
+    valid,
+    checked,
+    jour,
+    date,
+    index,
+    firstPoids,
+    dernierPoidsConnu,
+    changeDayPoids,
+    checkValidDay,
+  } = data;
 
-  //State
+  // State
   const [modalDisplay, setModalDisplay] = useState(false);
   const [selected, setSelected] = useState('oui');
-  const [poidsUpdate, setPoidsUpdate] = useState(props.firstPoids);
+  const [poidsUpdate, setPoidsUpdate] = useState('');
+
+  // Gestion de la modale
+  const openModal = (e) => {
+    e.stopPropagation();
+
+    // Priorité pour le choix du poids:
+    // 1. Le poids actuel du jour s'il existe
+    // 2. Le dernier poids connu d'un jour précédent
+    // 3. Le poids initial configuré
+    // 4. Une chaîne vide si rien n'est disponible
+    const poidsParDefaut = poids || dernierPoidsConnu || firstPoids || '';
+    setPoidsUpdate(poidsParDefaut);
+
+    setModalDisplay(true);
+  };
 
   //Gestion des classes CSS
   let classesBack, classesIcons;
@@ -28,22 +55,17 @@ function Day(props) {
     setModalDisplay(false);
 
     if (selected === 'oui') {
-      props.checkValidDay(props.index, true, true);
-      props.changeDayPoids(props.index, poidsUpdate);
+      checkValidDay(index, true, true);
+      changeDayPoids(index, poidsUpdate);
     } else if (selected === 'reset') {
-      props.checkValidDay(props.index, false, false);
-      props.changeDayPoids(props.index, '');
+      checkValidDay(index, false, false);
+      changeDayPoids(index, '');
     } else {
-      props.checkValidDay(props.index, false, true);
-      props.changeDayPoids(props.index, poidsUpdate);
+      checkValidDay(index, false, true);
+      changeDayPoids(index, poidsUpdate);
     }
   };
 
-  //Gestion de la modale
-  const openModal = (e) => {
-    e.stopPropagation();
-    setModalDisplay(true);
-  };
   const cancelClick = (e) => {
     e.stopPropagation();
     if (e.target.id === 'modaleAnnuler' || e.target.id === 'modale')
@@ -52,8 +74,12 @@ function Day(props) {
 
   /********************Rendu JSX********************/
   return (
-    <div className={`Day ${classesBack}`} onClick={openModal} role='button' aria-pressed={modalDisplay}>
-      <div className='date'>{props.date}</div>
+    <div
+      className={`Day ${classesBack}`}
+      onClick={openModal}
+      role='button'
+      aria-pressed={modalDisplay}>
+      <div className='date'>{date}</div>
       <div className='jour'>{jour}</div>
       <div className='poids-valid'>
         {poids > 0 && <span className='poids'>{poids}kgs</span>}
@@ -65,7 +91,7 @@ function Day(props) {
         <div className='Modale' onClick={cancelClick} id='modale'>
           <h1>Le {jour} Ramadan</h1>
           <form onSubmit={submitHandler} className='form'>
-            <div className='titre'> Avez vous jeuner ce jour: ({props.date})</div>
+            <div className='titre'> Avez vous jeuner ce jour: ({date})</div>
             <div className='buttons-radio'>
               <div className='button-radio green'>
                 <input

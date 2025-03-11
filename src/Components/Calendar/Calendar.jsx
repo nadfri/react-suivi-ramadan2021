@@ -13,8 +13,6 @@ import Total from './Total/Total';
 import ErrorModal from '../ErrorModal/ErrorModal';
 import Settings from './Settings/Settings';
 
-console.log('DB:', USERS);
-
 export default function Calendar({ user }) {
   /*State*/
   const [displaySettings, setDisplaySettings] = useState(false);
@@ -100,25 +98,38 @@ export default function Calendar({ user }) {
 
   /*Mise en place du calendrier*/
   function calendrier(state) {
+    // Préparer un tableau des jours avec leur poids pour une utilisation facile
+    const joursAvecPoids = state.jours
+      .map((jour, idx) => ({ ...jour, idx }))
+      .filter((jour) => jour.poids);
+
     return state.jours.map((day, index) => {
+      // Date formatting
       let firstDay = new Date(state.firstDay);
       let date = new Date();
-      date.setTime(firstDay.getTime() + index * 1000 * 3600 * 24); //better than setDate
-      date = new Intl.DateTimeFormat('fr-FR', {
+      date.setTime(firstDay.getTime() + index * 1000 * 3600 * 24);
+      const formattedDate = new Intl.DateTimeFormat('fr-FR', {
         year: '2-digit',
         month: '2-digit',
         day: '2-digit',
       }).format(date);
 
+      // Trouver le dernier poids enregistré avant ce jour
+      const dernierPoidsConnu =
+        joursAvecPoids.filter((jour) => jour.idx < index).pop()?.poids || '';
+
       return (
         <Day
           key={index}
-          date={date}
-          state={day}
-          firstPoids={state.firstPoids}
-          index={index}
-          changeDayPoids={changeDayPoids}
-          checkValidDay={checkValidDay}
+          data={{
+            ...day,
+            date: formattedDate,
+            index,
+            firstPoids: state.firstPoids,
+            dernierPoidsConnu,
+            changeDayPoids,
+            checkValidDay
+          }}
         />
       );
     });
@@ -232,7 +243,7 @@ export default function Calendar({ user }) {
 
       {state && (
         <div className='grid'>
-          {calendrier(state)}{' '}
+          {calendrier(state)}
           <Total jeuner={jeuner} manquer={manquer} pertePoids={pertePoids} />
         </div>
       )}
