@@ -60,25 +60,40 @@ export default function Calendar({ user }) {
   /*Mise à jour des Totaux*/
   useEffect(() => {
     if (state) {
+      // Calcul des jours de jeûne et manqués
       let countValid = 0;
       let countNotValid = 0;
+
       state.jours.forEach((jour) => {
-        if (jour.valid) countValid++;
-        else if (!jour.Valid && jour.checked) countNotValid++;
+        if (jour.valid) {
+          countValid++;
+        } else if (!jour.valid && jour.checked) {
+          countNotValid++;
+        }
       });
 
       setJeuner(countValid);
       setManquer(countNotValid);
 
-      /*Mise à jour du Poids*/
-      if (state.firstPoids) {
-        const tabKgs = state.jours.filter((jour) => jour.poids);
-        if (tabKgs.length < 1) setPertePoids(0);
-        else {
-          let total = (-(state.firstPoids - tabKgs[tabKgs.length - 1].poids)).toFixed(1);
-          total = total > 0 ? `+${total}` : total;
-          setPertePoids(total);
-        }
+      // Calcul de la variation de poids
+      const joursAvecPoids = state.jours.filter((jour) => jour.poids);
+
+      if (joursAvecPoids.length === 0) {
+        // Si aucun jour avec poids enregistré
+        setPertePoids(0);
+      } else {
+        // Récupérer le dernier poids enregistré
+        const dernierPoids = joursAvecPoids[joursAvecPoids.length - 1].poids;
+
+        // Utiliser firstPoids s'il est défini, sinon utiliser le premier poids disponible
+        const poidsInitial = state.firstPoids || joursAvecPoids[0].poids;
+
+        // Calculer la différence (négatif = perte, positif = gain)
+        const difference = (dernierPoids - poidsInitial).toFixed(1);
+
+        // Ajouter un "+" devant les valeurs positives pour plus de clarté
+        const formattedDifference = difference > 0 ? `+${difference}` : difference;
+        setPertePoids(formattedDifference);
       }
     }
   }, [state]);
@@ -145,7 +160,7 @@ export default function Calendar({ user }) {
   /*Suppression des datas de tous les users*/
   const resetAllUsersData = async () => {
     //Precisier quels users sont concernés
-    const usersToDelete = "users-test"; 
+    const usersToDelete = 'users-test';
     const usersSnapshot = await db.collection(usersToDelete).get();
 
     usersSnapshot.forEach(async (userDoc) => {
