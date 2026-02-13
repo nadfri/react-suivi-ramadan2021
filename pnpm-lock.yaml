@@ -12,6 +12,9 @@ importers:
 
   .:
     dependencies:
+      '@misque/hijri':
+        specifier: ^0.2.1
+        version: 0.2.1
       firebase:
         specifier: ^12.9.0
         version: 12.9.0
@@ -1271,6 +1274,14 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@misque/core@0.2.1':
+    resolution: {integrity: sha512-1TG7hnQjqwQLW5Ca8MGuvfgk9gKJEge+5Men5YNmLdL93r5DHsU1w5bL5NvkqyApLtA23HAs4530eCLudTQ3dA==}
+    engines: {node: '>=18.0.0'}
+
+  '@misque/hijri@0.2.1':
+    resolution: {integrity: sha512-L1nr3s6NjBOfPBIE9iVokmM6q6mSLyTqTma/urd4JWyXrU5b68W/Y2rbDZ9Rm7Z/48UdHer86di1tmnYaPeMrQ==}
+    engines: {node: '>=18.0.0'}
 
   '@pkgr/core@0.2.9':
     resolution: {integrity: sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==}
@@ -4888,6 +4899,12 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@misque/core@0.2.1': {}
+
+  '@misque/hijri@0.2.1':
+    dependencies:
+      '@misque/core': 0.2.1
 
   '@pkgr/core@0.2.9': {}
 

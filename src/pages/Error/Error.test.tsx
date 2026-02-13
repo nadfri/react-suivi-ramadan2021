@@ -36,14 +36,23 @@ describe('Error Page', () => {
   });
 
   it('should reload page when reload button is clicked', async () => {
-    const reloadSpy = vi.spyOn(window.location, 'reload').mockImplementation(() => undefined);
+    const reload = vi.fn();
+    const originalLocation = window.location;
+    Object.defineProperty(window, 'location', {
+      value: { ...originalLocation, reload },
+      writable: true,
+    });
+
     const user = userEvent.setup();
     renderError();
 
     const reloadBtn = screen.getByRole('button', { name: /Recharger la page/i });
     await user.click(reloadBtn);
 
-    expect(reloadSpy).toHaveBeenCalled();
-    reloadSpy.mockRestore();
+    expect(reload).toHaveBeenCalled();
+    Object.defineProperty(window, 'location', {
+      value: originalLocation,
+      writable: true,
+    });
   });
 });

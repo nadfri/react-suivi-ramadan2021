@@ -4,14 +4,10 @@
   --primary: #047857; /* Tailwind's emerald-700 */
 }
 
-@layer base {
-  body {
-    @apply bg-slate-50;
-  }
-}
+
 
 body {
-  margin: 0;
+  background-color: white;
   overflow: hidden;
   min-width: 320px;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -19,4 +15,14 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+button{
+  cursor: pointer;
+  transition: all 0.1s;
+
+  &:active {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
 }
