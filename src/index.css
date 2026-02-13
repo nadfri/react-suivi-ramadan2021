@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+:root {
+  --primary: #047857; /* Tailwind's emerald-700 */
+}
+
 @layer base {
   body {
     @apply bg-slate-50;
