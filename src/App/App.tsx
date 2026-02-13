@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import PWABadge from './features/PWA/PWABadge.tsx';
-import './App.css';
+import PWABadge from '@features/PWA/PWABadge.tsx';
 
 function App() {
   return (
