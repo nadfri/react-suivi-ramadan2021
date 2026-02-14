@@ -1,0 +1,1 @@
+export type FastingType = 'fasting' | 'not-fasting' | 'unknown';
