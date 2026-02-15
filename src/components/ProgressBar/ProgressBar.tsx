@@ -22,7 +22,7 @@ export function ProgressBar({ currentDay = 24, currentHijriYear = 1447 }: Props)
         className="w-1/2 bg-gray-200 rounded-full h-1 overflow-hidden"
       >
         <div
-          className="bg-amber-500 h-full"
+          className="bg-orange-300 h-full"
           style={{ width: `${(currentDay / monthLength) * 100}%` }}
         ></div>
       </div>
