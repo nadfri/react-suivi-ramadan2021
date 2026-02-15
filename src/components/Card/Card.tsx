@@ -7,6 +7,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { useState, useRef } from 'react';
 import { BiBadgeCheck, BiErrorAlt } from 'react-icons/bi';
 import { HiPlus, HiMinus } from 'react-icons/hi';
+import { WeightTrend } from '@components/WeightBadge/WeightTrend';
 import { useClickOutside } from '../../hooks/useClickOutside';
 
 type Props = {
@@ -163,15 +164,21 @@ export function Card({ day, weight, fasting = 'unknown' }: Props) {
                 <HiMinus className="size-4" />
               </button>
 
-              <div className="flex items-baseline gap-0.5">
-                <input
-                  type="number"
-                  step="0.1"
-                  className="w-16 bg-transparent text-center text-2xl font-black text-slate-800 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                  value={localWeight}
-                  onChange={handleWeightChange}
-                />
-                <span className="text-[10px] font-bold text-slate-400 uppercase">kgs</span>
+              <div className="flex-1 grid grid-cols-[1fr_auto_1fr] items-center">
+                <div /> {/* Spacer left */}
+                <div className="flex items-baseline gap-1">
+                  <input
+                    type="number"
+                    step="0.1"
+                    className="w-20 bg-transparent text-center text-3xl font-black text-slate-800 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    value={localWeight}
+                    onChange={handleWeightChange}
+                  />
+                </div>
+                <div className="flex items-center gap-2 pl-1">
+                  <span className="font-bold text-slate-400 uppercase">kgs</span>
+                  <WeightTrend current={localWeight} baseline={savedWeight} />
+                </div>
               </div>
 
               <button
