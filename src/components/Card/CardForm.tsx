@@ -125,15 +125,15 @@ export function CardForm({ initialWeight, initialFasting, onSave, onCancel }: Pr
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold text-sm hover:bg-slate-200 active:scale-[0.98] transition-all"
+          className="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold text-sm hover:bg-slate-200"
         >
           Annuler
         </button>
         <button
           type="submit"
-          className="flex-2 py-3 bg-emerald-700 text-white rounded-xl font-bold text-sm hover:bg-emerald-800 active:scale-[0.98] transition-all shadow-md"
+          className="flex-2 py-3 px-1 bg-emerald-700 text-white rounded-xl font-bold text-sm hover:bg-emerald-800"
         >
-          Enregistrer les modifications
+          Enregistrer
         </button>
       </div>
     </form>

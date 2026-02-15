@@ -40,7 +40,7 @@ export default function Settings() {
               type="button"
               onClick={handleSignOut}
               disabled={isSigningOut}
-              className="rounded-2xl bg-rose-600 px-4 py-2.5 text-sm font-semibold text-white shadow hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-70"
+              className="rounded-xl bg-rose-600 px-4 py-2.5 text-sm font-semibold text-white shadow hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isSigningOut ? 'Déconnexion en cours...' : 'Se déconnecter'}
             </button>
@@ -50,7 +50,7 @@ export default function Settings() {
             <p className="text-sm text-slate-600">Vous n&apos;êtes pas connecté.</p>
             <Link
               to="/auth/login"
-              className="inline-flex items-center justify-center rounded-2xl bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white shadow hover:bg-emerald-800"
+              className="inline-flex items-center justify-center rounded-xl bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white shadow hover:bg-emerald-800"
             >
               Se connecter
             </Link>

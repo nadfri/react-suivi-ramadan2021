@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '@context/AuthContext';
 
 type GuardProps = {
@@ -17,14 +17,13 @@ const LoadingPlaceholder = () => (
 
 export function ProtectedRoute({ children }: GuardProps) {
   const { user, loading } = useAuth();
-  const location = useLocation();
 
   if (loading) {
     return <LoadingPlaceholder />;
   }
 
   if (!user) {
-    return <Navigate to="/auth/login" replace state={{ from: location.pathname }} />;
+    return <Navigate to="/auth/login" replace />;
   }
 
   return <>{children}</>;

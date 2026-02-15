@@ -4,11 +4,8 @@
   --primary: #047857; /* Tailwind's emerald-700 */
 }
 
-
-
 body {
   background-color: white;
-  overflow: hidden;
   min-width: 320px;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-synthesis: none;
@@ -17,7 +14,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-button{
+button {
   cursor: pointer;
   transition: all 0.1s;
+}
+
+@layer utilities {
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fadeInScale {
+    animation: fadeInScale 0.3s ease-out;
+  }
 }
