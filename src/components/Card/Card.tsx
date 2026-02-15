@@ -51,7 +51,7 @@ export function Card({ day, weight, fasting = 'unknown' }: Props) {
   return (
     <article
       ref={cardRef}
-      className="w-full bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden transition-all duration-300"
+      className={`w-full bg-white rounded-3xl shadow-sm border border-slate-100 transition-all duration-300 focus-within:ring-2 focus-within:ring-sky-500/20`}
     >
       <button
         type="button"
@@ -59,7 +59,9 @@ export function Card({ day, weight, fasting = 'unknown' }: Props) {
         aria-controls={`actions-${ramadanDay}`}
         aria-label={`Jour ${ramadanDay} Ramadan, ${localDate}. ${open ? 'Fermer les détails' : 'Modifier le suivi'}`}
         onClick={handleOpen}
-        className="w-full flex items-center justify-between px-4 h-24 hover:bg-slate-50/50 transition-colors text-left focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none"
+        className={`w-full flex items-center justify-between px-4 h-24 hover:bg-slate-50/50 transition-colors text-left focus:outline-none ${
+          open ? 'rounded-t-3xl' : 'rounded-3xl'
+        }`}
       >
         <div className="flex items-center gap-4">
           <div className="text-center min-w-10 pr-4 border-r border-slate-200" aria-hidden="true">
