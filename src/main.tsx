@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import Router from './App/Router/Router.tsx';
 import ErrorBoundary from './App/ErrorBoundary.tsx';
+import { AuthProvider } from '@context/AuthContext.tsx';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) throw new Error('Root element not found');
@@ -10,7 +11,9 @@ if (!rootElement) throw new Error('Root element not found');
 createRoot(rootElement).render(
   <StrictMode>
     <ErrorBoundary>
-      <Router />
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
     </ErrorBoundary>
   </StrictMode>
 );
