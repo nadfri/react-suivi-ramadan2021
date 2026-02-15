@@ -20,8 +20,4 @@ body {
 button{
   cursor: pointer;
   transition: all 0.1s;
-
-  &:active {
-    opacity: 0.5;
-  }
 }
