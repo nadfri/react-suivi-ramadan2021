@@ -99,13 +99,13 @@ export function CardForm({ initialWeight, initialFasting, onSave, onCancel }: Pr
                 id="weight-input"
                 type="number"
                 step="0.1"
-                className="w-20 bg-transparent text-center text-3xl font-black text-slate-800 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                className="w-18 bg-transparent text-center text-3xl font-black text-slate-800 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 value={weight}
                 onChange={handleWeightChange}
               />
             </div>
             <div className="flex items-center gap-2 pl-1">
-              <span className="font-bold text-slate-400 uppercase">kgs</span>
+              <span className="font-bold text-slate-400">KGS</span>
               <WeightTrend current={weight} baseline={initialWeight} />
             </div>
           </div>

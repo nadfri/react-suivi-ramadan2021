@@ -14,8 +14,9 @@ type Props = {
 };
 
 export function Card({ day, weight, fasting = 'unknown' }: Props) {
-  const [open, setOpen] = useState(false);
-  const [savedWeight, setSavedWeight] = useState(weight || 75.0);
+  const isToday = day.toDateString() === new Date().toDateString();
+  const [open, setOpen] = useState(isToday);
+  const [savedWeight, setSavedWeight] = useState(weight ?? 0);
   const [savedFasting, setSavedFasting] = useState<FastingType>(fasting);
 
   const cardRef = useRef<HTMLDivElement>(null);
@@ -59,13 +60,17 @@ export function Card({ day, weight, fasting = 'unknown' }: Props) {
         aria-controls={`actions-${ramadanDay}`}
         aria-label={`Jour ${ramadanDay} Ramadan, ${localDate}. ${open ? 'Fermer les détails' : 'Modifier le suivi'}`}
         onClick={handleOpen}
-        className={`w-full flex items-center justify-between px-4 h-24 hover:bg-slate-50/50 transition-colors text-left focus:outline-none ${
-          open ? 'rounded-t-3xl' : 'rounded-3xl'
-        }`}
+        className={`w-full flex items-center justify-between px-4 hover:bg-slate-50/50 transition-colors text-left focus:outline-none ${
+          isToday ? 'h-32' : 'h-24'
+        } ${open ? 'rounded-t-3xl' : 'rounded-3xl'}`}
       >
         <div className="flex items-center gap-4">
           <div className="text-center min-w-10 pr-4 border-r border-slate-200" aria-hidden="true">
-            <span className="text-3xl font-black text-slate-800 block leading-none">
+            <span
+              className={`${
+                isToday ? 'text-6xl' : 'text-3xl'
+              } font-black text-slate-800 block leading-none`}
+            >
               {ramadanDay}
             </span>
             <span className="text-[9px] font-bold text-slate-400 uppercase">Ramadan</span>
@@ -79,13 +84,15 @@ export function Card({ day, weight, fasting = 'unknown' }: Props) {
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-2">
-          {savedWeight > 0 && <WeightBadge weight={savedWeight} />}
-          <IoIosArrowDown
-            className={`size-6 text-slate-400 duration-300 ${open ? 'rotate-180' : ''}`}
-            aria-hidden="true"
-          />
-        </div>
+        
+          <div className="flex items-center justify-center gap-2">
+            {savedWeight > 0 && <WeightBadge weight={savedWeight} />}
+            <IoIosArrowDown
+              className={`size-6 text-slate-400 duration-300 ${open ? 'rotate-180' : ''}`}
+              aria-hidden="true"
+            />
+          </div>
+      
       </button>
 
       <div
