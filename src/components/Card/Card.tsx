@@ -60,39 +60,37 @@ export function Card({ day, weight, fasting = 'unknown' }: Props) {
         aria-controls={`actions-${ramadanDay}`}
         aria-label={`Jour ${ramadanDay} Ramadan, ${localDate}. ${open ? 'Fermer les détails' : 'Modifier le suivi'}`}
         onClick={handleOpen}
-        className={`w-full flex items-center justify-between px-4 hover:bg-slate-50/50 transition-colors text-left focus:outline-none ${
-          isToday ? 'h-32' : 'h-24'
-        } ${open ? 'rounded-t-3xl' : 'rounded-3xl'}`}
+        className={`w-full flex items-center justify-between px-3 hover:bg-slate-50/50 transition-colors text-left focus:outline-none ${
+          isToday ? 'h-22' : 'h-20'
+        }`}
       >
-        <div className="flex items-center gap-4">
-          <div className="text-center min-w-10 pr-4 border-r border-slate-200" aria-hidden="true">
+        <div className="flex items-center gap-3">
+          <div className="text-center min-w-9 pr-3 border-r border-slate-200" aria-hidden="true">
             <span
               className={`${
-                isToday ? 'text-6xl' : 'text-3xl'
+                isToday ? 'text-5xl' : 'text-2xl'
               } font-black text-slate-800 block leading-none`}
             >
               {ramadanDay}
             </span>
-            <span className="text-[9px] font-bold text-slate-400 uppercase">Ramadan</span>
+            <span className="text-[8px] font-bold text-slate-400 uppercase">Ramadan</span>
           </div>
 
-          <div className="flex flex-col gap-2 items-start">
-            <p id={`card-title-${ramadanDay}`} className="text-slate-700 font-bold text-sm">
+          <div className="flex flex-col gap-1 items-start">
+            <p id={`card-title-${ramadanDay}`} className="text-slate-700 font-bold text-xs">
               {localDate}
             </p>
             <FastingBadge fasting={savedFasting} />
           </div>
         </div>
 
-        
-          <div className="flex items-center justify-center gap-2">
-            {savedWeight > 0 && <WeightBadge weight={savedWeight} />}
-            <IoIosArrowDown
-              className={`size-6 text-slate-400 duration-300 ${open ? 'rotate-180' : ''}`}
-              aria-hidden="true"
-            />
-          </div>
-      
+        <div className="flex items-center justify-center gap-1">
+          {savedWeight > 0 && <WeightBadge weight={savedWeight} />}
+          <IoIosArrowDown
+            className={`size-6 text-slate-400 duration-300 ${open ? 'rotate-180' : ''}`}
+            aria-hidden="true"
+          />
+        </div>
       </button>
 
       <div

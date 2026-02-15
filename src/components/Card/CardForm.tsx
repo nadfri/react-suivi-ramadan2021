@@ -36,9 +36,9 @@ export function CardForm({ initialWeight, initialFasting, onSave, onCancel }: Pr
 
   return (
     <form action={handleSubmit} className="overflow-hidden">
-      <div className="flex gap-2 px-4 pb-4 pt-0">
+      <div className="flex gap-2 px-3 pb-3 pt-0">
         <label
-          className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl border-2 font-bold text-sm cursor-pointer transition-all ${
+          className={`flex-1 flex items-center justify-center gap-2 py-1.5 rounded-xl border-2 font-bold text-xs cursor-pointer transition-all ${
             fasting === 'fasting'
               ? 'bg-green-100 text-green-800 border-green-500 shadow-inner'
               : 'bg-green-50 text-green-800 border-transparent hover:bg-green-100'
@@ -56,7 +56,7 @@ export function CardForm({ initialWeight, initialFasting, onSave, onCancel }: Pr
         </label>
 
         <label
-          className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl border-2 font-bold text-sm cursor-pointer transition-all ${
+          className={`flex-1 flex items-center justify-center gap-2 py-1.5 rounded-xl border-2 font-bold text-xs cursor-pointer transition-all ${
             fasting === 'not-fasting'
               ? 'bg-orange-100 text-orange-800 border-orange-500 shadow-inner'
               : 'bg-orange-50 text-orange-800 border-transparent hover:bg-orange-100'
@@ -75,37 +75,37 @@ export function CardForm({ initialWeight, initialFasting, onSave, onCancel }: Pr
         </label>
       </div>
 
-      <div className="px-4 pb-4">
+      <div className="px-3 pb-3">
         <label
           htmlFor="weight-input"
-          className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1"
+          className="block text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1.5 ml-1"
         >
           Poids enregistré
         </label>
-        <div className="bg-slate-50/50 rounded-2xl p-2 flex items-center justify-between border border-slate-100">
+        <div className="bg-slate-50/50 rounded-2xl p-1.5 flex items-center justify-between border border-slate-100">
           <button
             type="button"
             onClick={handleDecrement}
             aria-label="Diminuer le poids de 0.1 kg"
-            className="size-9 rounded-xl bg-white shadow-sm border border-slate-200 flex items-center justify-center text-slate-500 active:scale-90 transition-all hover:border-slate-300"
+            className="size-6 rounded-lg bg-white shadow-sm border border-slate-200 flex items-center justify-center text-slate-500 active:scale-90 transition-all hover:border-slate-300"
           >
-            <HiMinus className="size-4" />
+            <HiMinus className="size-3.5" />
           </button>
 
           <div className="flex-1 grid grid-cols-[1fr_auto_1fr] items-center">
             <div />
-            <div className="flex items-baseline gap-1">
+            <div className="flex items-baseline gap-0.5">
               <input
                 id="weight-input"
                 type="number"
                 step="0.1"
-                className="w-18 bg-transparent text-center text-3xl font-black text-slate-800 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                className="w-16 bg-transparent text-center text-xl font-black text-slate-800 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 value={weight}
                 onChange={handleWeightChange}
               />
             </div>
-            <div className="flex items-center gap-2 pl-1">
-              <span className="font-bold text-slate-400">KGS</span>
+            <div className="flex items-center gap-1 pl-0.5">
+              <span className="font-bold text-slate-400 text-xs">KGS</span>
               <WeightTrend current={weight} baseline={initialWeight} />
             </div>
           </div>
@@ -114,24 +114,24 @@ export function CardForm({ initialWeight, initialFasting, onSave, onCancel }: Pr
             type="button"
             onClick={handleIncrement}
             aria-label="Augmenter le poids de 0.1 kg"
-            className="size-9 rounded-xl bg-white shadow-sm border border-slate-200 flex items-center justify-center text-slate-500 active:scale-90 transition-all hover:border-slate-300"
+            className="size-6 rounded-lg bg-white shadow-sm border border-slate-200 flex items-center justify-center text-slate-500 active:scale-90 transition-all hover:border-slate-300"
           >
-            <HiPlus className="size-4" />
+            <HiPlus className="size-3.5" />
           </button>
         </div>
       </div>
 
-      <div className="px-4 pb-4 flex gap-3">
+      <div className="px-3 pb-3 flex gap-2">
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 py-3 bg-slate-100 text-slate-600 rounded-xl font-bold text-sm hover:bg-slate-200"
+          className="flex-1 py-2 bg-slate-100 text-slate-600 rounded-lg font-bold text-xs hover:bg-slate-200"
         >
           Annuler
         </button>
         <button
           type="submit"
-          className="flex-2 py-3 px-1 bg-emerald-700 text-white rounded-xl font-bold text-sm hover:bg-emerald-800"
+          className="flex-2 py-2 px-1 bg-emerald-700 text-white rounded-lg font-bold text-xs hover:bg-emerald-800"
         >
           Enregistrer
         </button>
