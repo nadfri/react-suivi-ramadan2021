@@ -8,7 +8,7 @@ function App() {
     <div className="flex flex-col h-svh overflow-hidden container mx-auto bg-slate-50 shadow">
       <Header />
 
-      <main className="flex-1 container mx-auto py-2 px-4 overflow-y-auto">
+      <main className="flex-1 container mx-auto pt-2 pb-24 px-4 overflow-y-auto scroll-smooth">
         <Outlet />
       </main>
 

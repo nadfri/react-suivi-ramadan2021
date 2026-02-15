@@ -76,13 +76,17 @@ export function CardForm({ initialWeight, initialFasting, onSave, onCancel }: Pr
       </div>
 
       <div className="px-4 pb-4">
-        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">
+        <label
+          htmlFor="weight-input"
+          className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1"
+        >
           Poids enregistré
         </label>
         <div className="bg-slate-50/50 rounded-2xl p-2 flex items-center justify-between border border-slate-100">
           <button
             type="button"
             onClick={handleDecrement}
+            aria-label="Diminuer le poids de 0.1 kg"
             className="size-9 rounded-xl bg-white shadow-sm border border-slate-200 flex items-center justify-center text-slate-500 active:scale-90 transition-all hover:border-slate-300"
           >
             <HiMinus className="size-4" />
@@ -92,6 +96,7 @@ export function CardForm({ initialWeight, initialFasting, onSave, onCancel }: Pr
             <div />
             <div className="flex items-baseline gap-1">
               <input
+                id="weight-input"
                 type="number"
                 step="0.1"
                 className="w-20 bg-transparent text-center text-3xl font-black text-slate-800 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -108,6 +113,7 @@ export function CardForm({ initialWeight, initialFasting, onSave, onCancel }: Pr
           <button
             type="button"
             onClick={handleIncrement}
+            aria-label="Augmenter le poids de 0.1 kg"
             className="size-9 rounded-xl bg-white shadow-sm border border-slate-200 flex items-center justify-center text-slate-500 active:scale-90 transition-all hover:border-slate-300"
           >
             <HiPlus className="size-4" />

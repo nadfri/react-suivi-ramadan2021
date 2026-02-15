@@ -1,4 +1,3 @@
-import './Card.css';
 import { WeightBadge } from '@components/WeightBadge/WeightBadge';
 import type { FastingType } from 'src/types/types';
 import { FastingBadge } from '@components/FastingBadge/FastingBadge';
@@ -40,8 +39,17 @@ export function Card({ day, weight, fasting = 'unknown' }: Props) {
     setOpen(false);
   };
 
+  const handleOpen = () => {
+    setOpen(!open);
+    if (!open) {
+      setTimeout(() => {
+        cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+  };
+
   return (
-    <div
+    <article
       ref={cardRef}
       className="w-full bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden transition-all duration-300"
     >
@@ -49,11 +57,12 @@ export function Card({ day, weight, fasting = 'unknown' }: Props) {
         type="button"
         aria-expanded={open}
         aria-controls={`actions-${ramadanDay}`}
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-4 h-24 hover:bg-slate-50/50 transition-colors text-left"
+        aria-label={`Jour ${ramadanDay} Ramadan, ${localDate}. ${open ? 'Fermer les détails' : 'Modifier le suivi'}`}
+        onClick={handleOpen}
+        className="w-full flex items-center justify-between px-4 h-24 hover:bg-slate-50/50 transition-colors text-left focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none"
       >
         <div className="flex items-center gap-4">
-          <div className="text-center min-w-10 pr-4 border-r border-slate-200">
+          <div className="text-center min-w-10 pr-4 border-r border-slate-200" aria-hidden="true">
             <span className="text-3xl font-black text-slate-800 block leading-none">
               {ramadanDay}
             </span>
@@ -61,7 +70,9 @@ export function Card({ day, weight, fasting = 'unknown' }: Props) {
           </div>
 
           <div className="flex flex-col gap-2 items-start">
-            <p className="text-slate-700 font-bold text-sm">{localDate}</p>
+            <p id={`card-title-${ramadanDay}`} className="text-slate-700 font-bold text-sm">
+              {localDate}
+            </p>
             <FastingBadge fasting={savedFasting} />
           </div>
         </div>
@@ -77,21 +88,22 @@ export function Card({ day, weight, fasting = 'unknown' }: Props) {
 
       <div
         id={`actions-${ramadanDay}`}
-        className={`grid transition-[grid-template-rows,visibility] duration-200 ease-in-out ${
-          open ? 'grid-rows-[1fr] visible' : 'grid-rows-[0fr] invisible'
+        role="region"
+        aria-labelledby={`card-title-${ramadanDay}`}
+        inert={!open ? true : undefined}
+        className={`grid transition-[grid-template-rows] duration-200 ease-in-out ${
+          open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
         }`}
       >
         <div className="overflow-hidden">
-          {open && (
-            <CardForm
-              initialWeight={savedWeight}
-              initialFasting={savedFasting}
-              onSave={handleSave}
-              onCancel={handleClose}
-            />
-          )}
+          <CardForm
+            initialWeight={savedWeight}
+            initialFasting={savedFasting}
+            onSave={handleSave}
+            onCancel={handleClose}
+          />
         </div>
       </div>
-    </div>
+    </article>
   );
 }
