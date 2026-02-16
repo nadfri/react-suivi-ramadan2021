@@ -1,7 +1,7 @@
 //Librairies
 import { db } from '../../firebase';
-import React, { useState, useEffect } from 'react';
-import { FIRST_DAY, USERS } from '../../utils';
+import { useState, useEffect } from 'react';
+import { USERS } from '../../utils';
 //CSS
 import './Calendar.scss';
 import settingIco from './Settings/settings.svg';
@@ -128,7 +128,7 @@ export default function Calendar({ user }) {
             firstPoids: state.firstPoids,
             dernierPoidsConnu,
             changeDayPoids,
-            checkValidDay
+            checkValidDay,
           }}
         />
       );
@@ -168,44 +168,6 @@ export default function Calendar({ user }) {
     setDisplaySettings(true);
   };
 
-  /*Suppression des datas de tous les users*/
-  const resetAllUsersData = async () => {
-    //Precisier quels users sont concernés
-    const usersToDelete = 'users-test';
-    const usersSnapshot = await db.collection(usersToDelete).get();
-
-    usersSnapshot.forEach(async (userDoc) => {
-      const user = userDoc.data();
-      const copyState = { ...user };
-      copyState.firstConnect = true;
-      copyState.firstPoids = '';
-      copyState.firstDay = FIRST_DAY;
-
-      for (let jour of copyState.jours) {
-        jour.poids = '';
-        jour.valid = false;
-        jour.checked = false;
-      }
-
-      await db.collection(usersToDelete).doc(userDoc.id).set(copyState);
-    });
-
-    console.log('Reset All Users Data', usersToDelete);
-  };
-
-  const copyUsersToUsersTest = async () => {
-    db.collection('users')
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          // Copiez chaque document dans la collection 'users-test'
-          db.collection('users-test').doc(doc.id).set(doc.data());
-        });
-      });
-
-    console.log('Copy Users to DB TEST');
-  };
-
   /********************Rendu JSX********************/
   return (
     <div className='Calendar'>
@@ -221,10 +183,6 @@ export default function Calendar({ user }) {
         role='button'
         aria-pressed={displaySettings}
       />
-
-      {/*Reset all users data*/}
-      {/* <button onClick={resetAllUsersData}>Reset All Users Data</button> 
-      <button onClick={copyUsersToUsersTest}>Copy Users to DB TEST</button> */}
 
       {displaySettings && (
         <Settings

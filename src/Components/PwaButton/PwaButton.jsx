@@ -13,7 +13,7 @@ function PwaButton() {
 			setTimeout(() => {
 				setSupportsPWA(true);
 				setPromptInstall(event);
-			}, 500);
+			}, 300);
 
 			setTimeout(() => setSupportsPWA(false), 7000);
 		};
