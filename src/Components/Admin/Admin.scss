@@ -95,9 +95,24 @@
       border-radius: 6px;
       font-size: 1rem;
       font-weight: 600;
-      cursor: pointer;
       transition: all 0.3s ease;
       color: white;
+
+      &.btn-success {
+        background-color: #4caf50;
+        &:hover:not(:disabled) {
+          background-color: #43a047;
+          transform: translateY(-2px);
+        }
+      }
+
+      &.btn-primary {
+        background-color: #2196f3;
+        &:hover:not(:disabled) {
+          background-color: #1e88e5;
+          transform: translateY(-2px);
+        }
+      }
 
       &.btn-danger {
         background-color: #f44336;

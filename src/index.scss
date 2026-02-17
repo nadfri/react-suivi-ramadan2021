@@ -33,6 +33,7 @@ body {
 button {
   color: white;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   &:disabled {
     cursor: not-allowed;
@@ -47,7 +48,7 @@ button {
   padding: 5px;
   width: 80%;
   box-shadow: 0 0 5px 0 var(--box-shadow-color);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .theme1,

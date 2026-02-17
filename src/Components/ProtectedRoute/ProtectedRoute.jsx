@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { db } from '../../firebase';
-import NotFound from '../NotFound/NotFound';
-import Loader from '../Loader/Loader';
 
 /**
  * ProtectedRoute: Route sécurisée qui redirige vers l'accueil si non connecté

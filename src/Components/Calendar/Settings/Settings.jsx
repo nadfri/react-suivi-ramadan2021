@@ -5,6 +5,7 @@ import { db } from '../../../firebase';
 import { USERS } from '../../../utils';
 import { useTheme } from '../../../Context/Context';
 import { themes } from '../../../themes/themes';
+import ConfirmModal from '../../ConfirmModal/ConfirmModal';
 
 import { BsEnvelopeAtFill } from 'react-icons/bs';
 import { FaLinkedin, FaGithub, FaHistory } from 'react-icons/fa';
@@ -22,7 +23,7 @@ export default function Settings(props) {
   const [detteTotale, setDetteTotale] = useState(0);
 
   const [confirmation, setConfirmation] = useState(false);
-  const [confirmationSupp, setConfirmationSupp] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Vérifier si l'utilisateur a un historique et des dettes
   useEffect(() => {
@@ -77,7 +78,7 @@ export default function Settings(props) {
 
   //Gestion de la suppression des données
   const suppressionOnclick = () => {
-    setConfirmationSupp(true);
+    setIsModalOpen(true);
   };
 
   const suppressionDef = () => {
@@ -85,7 +86,7 @@ export default function Settings(props) {
     setConfirmation(true);
     setFirstPoids('');
     props.changeFirstPoids('');
-    setConfirmationSupp(false);
+    setIsModalOpen(false);
   };
 
   //Gestion de l'event Annuler
@@ -153,6 +154,8 @@ export default function Settings(props) {
           </button>
         </div>
 
+        <hr />
+
         <div className='history-section'>
           <Link to='/historic' className={`btn-history ${hasHistory ? 'has-data' : ''}`}>
             <FaHistory /> Historique
@@ -174,11 +177,8 @@ export default function Settings(props) {
         <button type='button' className='suppression' onClick={suppressionOnclick}>
           Supprimer Toutes les Données
         </button>
-        {confirmationSupp ? (
-          <button type='button' className='suppression def' onClick={suppressionDef}>
-            Confirmer la Suppression
-          </button>
-        ) : null}
+
+        <hr />
 
         <a
           href='https://quizzislam.netlify.app/'
@@ -217,6 +217,15 @@ export default function Settings(props) {
           <BiSolidBookHeart className='icon' />
         </a>
       </form>
+
+      <ConfirmModal
+        isOpen={isModalOpen}
+        title='Supprimer mes données'
+        message='Êtes-vous sûr de vouloir supprimer TOUTES vos données? Cette action est irréversible.'
+        type='danger'
+        onConfirm={suppressionDef}
+        onCancel={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }
