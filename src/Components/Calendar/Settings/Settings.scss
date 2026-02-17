@@ -8,6 +8,7 @@
   align-items: center;
   animation: fadeIn 0.3s forwards;
 
+
   h1 {
     margin: 0;
     margin-top: 10px;
@@ -21,7 +22,7 @@
 
   form {
     position: relative;
-    margin-top: 20%;
+    margin-top: 50px;
     background-color: var(--bg-secondary);
     padding: 40px 10px 20px 10px;
     border-radius: 5px;
@@ -34,6 +35,18 @@
     flex-direction: column;
     box-shadow: 0 0 3px 0 black;
     animation: zoom 0.3s forwards;
+
+    @media (max-width: 480px) {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
   }
 
   label {
@@ -61,6 +74,94 @@
       box-shadow: 0 0 5px 0 var(--box-shadow-color);
       font-family: Lobster;
       width: 48%;
+      cursor: pointer;
+    }
+
+    button#annuler {
+      background-color: #e2e8f0; // Gris clair
+      color: #4a5568;
+
+      &:hover {
+        background-color: #cbd5e0;
+      }
+    }
+  }
+
+  .history-section {
+    width: 100%;
+    margin: 10px 0;
+
+    .btn-history {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #3182ce;
+      color: white;
+      font-family: Lobster;
+      font-size: 1.1rem;
+      cursor: pointer;
+      position: relative;
+      text-decoration: none;
+      box-shadow: 0 0 5px 0 var(--box-shadow-color);
+
+      &:hover {
+        background-color: #2b6cb0;
+      }
+
+      .badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: #e53e3e;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid white;
+        animation: pulse 1.5s infinite;
+      }
+    }
+  }
+
+  .dette-section {
+    background-color: #fffaf0;
+    border: 1px solid #feebc8;
+    border-radius: 5px;
+    padding: 12px;
+    margin: 10px 0;
+    text-align: center;
+    box-shadow: 0 0 5px 0 var(--box-shadow-color);
+
+    p {
+      margin: 0 0 8px 0;
+      color: #c05621;
+      strong {
+        font-size: 1.2rem;
+      }
+    }
+
+    button {
+      background-color: #ed8936;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-family: Lobster;
+      cursor: pointer;
+      width: 100%;
+
+      &:hover {
+        background-color: #dd6b20;
+      }
     }
   }
 

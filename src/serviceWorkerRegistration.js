@@ -66,7 +66,12 @@ function registerValidSW(swUrl, config) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
               // content until all client tabs are closed.
-              console.log("Mise à jour disponible, redemarrer l'app ou le navigateur");
+              console.log("Mise à jour disponible");
+
+              // ✅ Dispatcher un événement personnalisé pour l'app
+              window.dispatchEvent(
+                new CustomEvent('swUpdate', { detail: registration })
+              );
 
               // Execute callback
               if (config && config.onUpdate) {

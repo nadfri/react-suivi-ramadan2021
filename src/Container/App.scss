@@ -1,21 +1,20 @@
 .App {
-	position: relative;
-	text-align: center;
-	height: 100%;
-	max-width: 800px;
-	margin: auto;
-	overflow-x: hidden;
+  position: relative;
+  text-align: center;
+  height: 100%;
+  max-width: 800px;
+  margin: auto;
+  overflow-x: hidden;
 
-
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 @media screen and (min-width: 800px) {
-	.App {
-		border: 2px solid #f3d07b;
-		border-radius: 5px;
-		box-shadow: 0 0 10px 3px black;
-	}
+  .App {
+    border: 2px solid #f3d07b;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 3px black;
+  }
 }

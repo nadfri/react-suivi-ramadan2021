@@ -1,0 +1,207 @@
+.History {
+  min-height: 100vh;
+  width: 100%;
+  padding: 80px 15px 40px;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+
+  .history-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    height: fit-content;
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      color: #333;
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 20px;
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: translateX(-5px);
+      }
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-top: 0;
+      margin-bottom: 25px;
+      text-align: center;
+      color: #2c3e50;
+    }
+  }
+
+  .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .history-card {
+      background-color: #f8f9fa;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      overflow: hidden;
+
+      &:hover {
+        background-color: #f1f5f9;
+        transform: scale(1.01);
+      }
+
+      &.active {
+        border-color: #3182ce;
+        background-color: #ebf8ff;
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        color: #2b6cb0;
+      }
+
+      .card-summary {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 0.85rem;
+        color: #4a5568;
+
+        .stat {
+          min-width: fit-content;
+        }
+
+        .stat span {
+          color: #2d3748;
+          font-weight: 600;
+        }
+      }
+
+      .card-details {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #cbd5e0;
+        animation: fadeIn 0.3s ease-in-out;
+
+        p {
+          font-size: 0.85rem;
+          margin-bottom: 8px;
+          color: #4a5568;
+        }
+
+        .days-grid {
+          display: grid;
+          grid-template-columns: repeat(10, 1fr);
+          gap: 4px;
+          margin-top: 10px;
+
+          .day-mini {
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            border-radius: 3px;
+            background-color: #edf2f7;
+            color: #718096;
+
+            &.valid {
+              background-color: #48bb78;
+              color: white;
+            }
+
+            &.missed {
+              background-color: #f56565;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .no-history {
+    text-align: center;
+    color: #a0aec0;
+    margin-top: 50px;
+    font-style: italic;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark mode theme compatibility - assuming based on App.scss class names */
+.dark-theme .History {
+  .history-modal {
+    background-color: #2d3748;
+    color: #edf2f7;
+
+    h1 {
+      color: #ebf8ff;
+    }
+    .close-btn {
+      color: #edf2f7;
+    }
+  }
+
+  .history-card {
+    background-color: #1a202c;
+    border-color: #4a5568;
+
+    &:hover {
+      background-color: #2d3748;
+    }
+
+    &.active {
+      border-color: #4299e1;
+      background-color: #2a4365;
+    }
+
+    .card-header {
+      color: #63b3ed;
+    }
+    .card-summary {
+      color: #a0aec0;
+      .stat span {
+        color: #e2e8f0;
+      }
+    }
+    .card-details {
+      border-top-color: #4a5568;
+      p {
+        color: #a0aec0;
+      }
+      .days-grid .day-mini {
+        background-color: #2d3748;
+        color: #a0aec0;
+      }
+    }
+  }
+}

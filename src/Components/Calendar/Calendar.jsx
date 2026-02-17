@@ -140,7 +140,13 @@ export default function Calendar({ user }) {
     const copyState = { ...state };
     copyState.jours[index].poids = value;
     setState(copyState);
-    db.collection(USERS).doc(user.uid).update(copyState);
+    db.collection(USERS)
+      .doc(user.uid)
+      .update(copyState)
+      .catch((err) => {
+        console.error(err);
+        setError(true);
+      });
   };
 
   const checkValidDay = (index, valid, check) => {
@@ -148,7 +154,13 @@ export default function Calendar({ user }) {
     copyState.jours[index].valid = valid;
     copyState.jours[index].checked = check;
     setState(copyState);
-    db.collection(USERS).doc(user.uid).update(copyState);
+    db.collection(USERS)
+      .doc(user.uid)
+      .update(copyState)
+      .catch((err) => {
+        console.error(err);
+        setError(true);
+      });
   };
 
   /*Suppression De la Base de Données*/
@@ -163,7 +175,13 @@ export default function Calendar({ user }) {
       jour.checked = false;
     }
 
-    db.collection(USERS).doc(user.uid).set(copyState);
+    db.collection(USERS)
+      .doc(user.uid)
+      .set(copyState)
+      .catch((err) => {
+        console.error(err);
+        setError(true);
+      });
     setState(copyState);
     setDisplaySettings(true);
   };

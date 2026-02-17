@@ -63,7 +63,8 @@ function Inscription(props) {
       .then((newUser) => {
         db.collection(USERS)
           .doc(newUser.user.uid)
-          .set({ ...data, id: newUser.user.uid });
+          .set({ ...data, id: newUser.user.uid })
+          .catch((error) => setError(error.message));
 
         props.history.push('/calendar');
       })
