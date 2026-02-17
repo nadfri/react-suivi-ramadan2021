@@ -1,5 +1,5 @@
 import './Settings.scss';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../../../firebase';
 import { USERS } from '../../../utils';
@@ -22,6 +22,19 @@ export default function Settings(props) {
 
   const [confirmation, setConfirmation] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [historyCount, setHistoryCount] = useState(0);
+
+  // Vérifier le nombre d'historiques
+  useEffect(() => {
+    db.collection(USERS)
+      .doc(props.user.uid)
+      .collection('history')
+      .get()
+      .then((snapshot) => {
+        setHistoryCount(snapshot.size);
+      })
+      .catch((err) => console.warn('Erreur récupération historique:', err.message));
+  }, [props.user.uid]);
 
   const handleTheme = (event) => {
     setRadioThemeID(event.target.value);
@@ -125,6 +138,7 @@ export default function Settings(props) {
 
         <Link to='/historic' className='btn-history'>
           <FaHistory /> Historique
+          {historyCount > 0 && <span className='badge'>{historyCount}</span>}
         </Link>
 
         <button type='button' className='suppression' onClick={suppressionOnclick}>
