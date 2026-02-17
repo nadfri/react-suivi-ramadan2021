@@ -74,7 +74,8 @@ button {
 }
 
 /*THEME 2*/
-.theme2,.theme8 {
+.theme2,
+.theme8 {
   color: var(--color-theme-2);
 
   a {
@@ -91,8 +92,6 @@ button {
     background: var(--color-theme-2) !important;
   }
 }
-
-
 
 /*Animations*/
 @keyframes zoom {

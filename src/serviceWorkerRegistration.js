@@ -1,11 +1,11 @@
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
-    // [::1] is the IPv6 localhost address.
-    window.location.hostname === '[::1]' ||
-    // 127.0.0.0/8 are considered localhost for IPv4.
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
+  // [::1] is the IPv6 localhost address.
+  window.location.hostname === '[::1]' ||
+  // 127.0.0.0/8 are considered localhost for IPv4.
+  window.location.hostname.match(
+    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/,
+  ),
 );
 
 export function register(config) {
@@ -31,7 +31,7 @@ export function register(config) {
         navigator.serviceWorker.ready.then(() => {
           console.log(
             'This web app is being served cache-first by a service ' +
-              'worker. To learn more, visit https://cra.link/PWA'
+              'worker. To learn more, visit https://cra.link/PWA',
           );
         });
       } else {
@@ -49,10 +49,13 @@ function registerValidSW(swUrl, config) {
       //------- to update application on startup load
       registration.update();
       // create interval to update every 5 minutes
-      setInterval(() => {
-        registration.update();
-        console.debug('Checked for update...');
-      }, 1000 * 60 * 5);
+      setInterval(
+        () => {
+          registration.update();
+          console.debug('Checked for update...');
+        },
+        1000 * 60 * 5,
+      );
       //------- End of update application on startup load
 
       registration.onupdatefound = () => {
@@ -66,12 +69,10 @@ function registerValidSW(swUrl, config) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
               // content until all client tabs are closed.
-              console.log("Mise à jour disponible");
+              console.log('Mise à jour disponible');
 
               // ✅ Dispatcher un événement personnalisé pour l'app
-              window.dispatchEvent(
-                new CustomEvent('swUpdate', { detail: registration })
-              );
+              window.dispatchEvent(new CustomEvent('swUpdate', { detail: registration }));
 
               // Execute callback
               if (config && config.onUpdate) {

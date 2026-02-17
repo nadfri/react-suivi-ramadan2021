@@ -97,7 +97,12 @@ export default function Settings(props) {
 
   /********************Rendu JSX********************/
   return (
-    <div className='Settings' onClick={cancel} id='settings' role='button' aria-pressed={props.displaySettings}>
+    <div
+      className='Settings'
+      onClick={cancel}
+      id='settings'
+      role='button'
+      aria-pressed={props.displaySettings}>
       <h1>Paramètres</h1>
       <form onSubmit={submitHandler} className='form'>
         {confirmation && (
@@ -149,10 +154,7 @@ export default function Settings(props) {
         </div>
 
         <div className='history-section'>
-          <Link
-            to='/historic'
-            className={`btn-history ${hasHistory ? 'has-data' : ''}`}
-          >
+          <Link to='/historic' className={`btn-history ${hasHistory ? 'has-data' : ''}`}>
             <FaHistory /> Historique
             {hasHistory && <span className='badge'>1</span>}
           </Link>
@@ -160,7 +162,9 @@ export default function Settings(props) {
 
         {detteTotale > 0 && (
           <div className='dette-section'>
-            <p>Jours à rattraper : <strong>{detteTotale}</strong></p>
+            <p>
+              Jours à rattraper : <strong>{detteTotale}</strong>
+            </p>
             <button type='button' onClick={handleDecreaseDette}>
               J'ai rattrapé un jour
             </button>

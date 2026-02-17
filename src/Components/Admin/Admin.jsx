@@ -1,27 +1,58 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { db } from '../../firebase';
 import { FIRST_DAY, USERS } from '../../utils';
+import Loader from '../Loader/Loader';
 import './Admin.scss';
+import { MdArrowBackIos } from "react-icons/md";
 
-export default function Admin() {
+export default function Admin({ user }) {
+  const [isAdmin, setIsAdmin] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [usersCount, setUsersCount] = useState(0);
+  const history = useHistory();
 
-  // Charger le nombre de users au montage
+  // Vérification du rôle admin au montage
   useEffect(() => {
-    const fetchUsersCount = async () => {
-      try {
-        const snapshot = await db.collection(USERS).get();
-        setUsersCount(snapshot.size);
-      } catch (err) {
-        console.error('Erreur lors de la récupération des users:', err);
-      }
-    };
+    if (!user) {
+      setIsAdmin(false);
+      return;
+    }
 
-    fetchUsersCount();
-  }, []);
+    db.collection('users')
+      .doc(user.uid)
+      .get()
+      .then((doc) => {
+        if (doc.exists && doc.data()?.role === 'admin') {
+          setIsAdmin(true);
+        } else {
+          setIsAdmin(false);
+          // Rediriger vers 404 si pas admin
+          history.push('/404');
+        }
+      })
+      .catch((err) => {
+        console.error('Erreur vérification admin:', err);
+        setIsAdmin(false);
+        history.push('/404');
+      });
+  }, [user, history]);
+
+  // Charger le nombre de users quand on est admin
+  useEffect(() => {
+    if (isAdmin) {
+      const fetchUsersCount = async () => {
+        try {
+          const snapshot = await db.collection(USERS).get();
+          setUsersCount(snapshot.size);
+        } catch (err) {
+          console.error('Erreur lors de la récupération des users:', err);
+        }
+      };
+      fetchUsersCount();
+    }
+  }, [isAdmin]);
 
   const showMessage = (msg) => {
     setMessage(msg);
@@ -152,13 +183,22 @@ export default function Admin() {
     }
   };
 
+  if (isAdmin === null) {
+    return <Loader />;
+  }
+
+  if (isAdmin === false) {
+    return null; // Déjà géré par history.push('/404')
+  }
+
   return (
-    <div className='Admin'>
-      <div className='admin-container'>
+  
+      <div className='Admin'>
+        <h1>Panneau Admin</h1>
+
         <Link to='/' className='back-btn'>
-          🏠 Accueil
+          <MdArrowBackIos /> Accueil
         </Link>
-        <h1>🔐 Panneau Admin</h1>
 
         <div className='message' style={{ display: message ? 'block' : 'none' }}>
           {message}
@@ -206,6 +246,5 @@ export default function Admin() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
