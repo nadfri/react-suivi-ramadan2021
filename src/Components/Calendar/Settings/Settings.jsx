@@ -1,5 +1,5 @@
 import './Settings.scss';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../../../firebase';
 import { USERS } from '../../../utils';
@@ -19,42 +19,9 @@ export default function Settings(props) {
 
   const [firstDay, setFirstDay] = useState(props.firstDay);
   const [firstPoids, setFirstPoids] = useState(props.firstPoids);
-  const [hasHistory, setHasHistory] = useState(false);
-  const [detteTotale, setDetteTotale] = useState(0);
 
   const [confirmation, setConfirmation] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Vérifier si l'utilisateur a un historique et des dettes
-  useEffect(() => {
-    db.collection(USERS)
-      .doc(props.user.uid)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          setDetteTotale(doc.data().detteTotale || 0);
-        }
-      })
-      .catch((err) => console.warn('Dette non récupérée:', err.message));
-
-    db.collection(USERS)
-      .doc(props.user.uid)
-      .collection('history')
-      .limit(1)
-      .get()
-      .then((snapshot) => {
-        if (!snapshot.empty) setHasHistory(true);
-      })
-      .catch((err) => console.warn('Historique non accessible:', err.message));
-  }, [props.user.uid]);
-
-  const handleDecreaseDette = () => {
-    if (detteTotale > 0) {
-      const newDette = detteTotale - 1;
-      setDetteTotale(newDette);
-      db.collection(USERS).doc(props.user.uid).update({ detteTotale: newDette });
-    }
-  };
 
   const handleTheme = (event) => {
     setRadioThemeID(event.target.value);
@@ -156,23 +123,9 @@ export default function Settings(props) {
 
         <hr />
 
-        <div className='history-section'>
-          <Link to='/historic' className={`btn-history ${hasHistory ? 'has-data' : ''}`}>
-            <FaHistory /> Historique
-            {hasHistory && <span className='badge'>1</span>}
-          </Link>
-        </div>
-
-        {detteTotale > 0 && (
-          <div className='dette-section'>
-            <p>
-              Jours à rattraper : <strong>{detteTotale}</strong>
-            </p>
-            <button type='button' onClick={handleDecreaseDette}>
-              J'ai rattrapé un jour
-            </button>
-          </div>
-        )}
+        <Link to='/historic' className='btn-history'>
+          <FaHistory /> Historique
+        </Link>
 
         <button type='button' className='suppression' onClick={suppressionOnclick}>
           Supprimer Toutes les Données

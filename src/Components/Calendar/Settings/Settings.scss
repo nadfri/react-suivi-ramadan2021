@@ -85,78 +85,24 @@
     }
   }
 
-  .history-section {
+  .btn-history {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     width: 100%;
-
-    .btn-history {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 5px;
-      border: none;
-      border-radius: 5px;
-      background-color: #ff9800;
-      color: white;
-      font-family: Lobster;
-      position: relative;
-      text-decoration: none;
-      box-shadow: 0 0 5px 0 var(--box-shadow-color);
-
-      &:hover {
-        background-color: #2b6cb0;
-      }
-
-      .badge {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background-color: #e53e3e;
-        color: white;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        font-size: 0.75rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid white;
-        animation: pulse 1.5s infinite;
-      }
-    }
-  }
-
-  .dette-section {
-    background-color: #fffaf0;
-    border: 1px solid #feebc8;
+    padding: 5px;
+    border: none;
     border-radius: 5px;
-    padding: 12px;
-    margin: 10px 0;
-    text-align: center;
+    background-color: #ff9800;
+    color: white;
+    font-family: Lobster;
+    text-decoration: none;
     box-shadow: 0 0 5px 0 var(--box-shadow-color);
+    font-size: 0.85rem;
 
-    p {
-      margin: 0 0 8px 0;
-      color: #c05621;
-      strong {
-        font-size: 1.2rem;
-      }
-    }
-
-    button {
-      background-color: #ed8936;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 5px;
-      font-family: Lobster;
-      cursor: pointer;
-      width: 100%;
-
-      &:hover {
-        background-color: #dd6b20;
-      }
+    &:hover {
+      background-color: #2b6cb0;
     }
   }
 
